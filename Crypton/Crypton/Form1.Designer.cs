@@ -40,7 +40,7 @@
             this.textBoxSourceText = new System.Windows.Forms.TextBox();
             this.labelSourceText = new System.Windows.Forms.Label();
             this.labelIntro = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelCurrentLicense = new System.Windows.Forms.Label();
             this.linkLabelLicenseStatus = new System.Windows.Forms.LinkLabel();
             this.buttonClearResults = new System.Windows.Forms.Button();
             this.labelKeyInfo = new System.Windows.Forms.Label();
@@ -62,6 +62,8 @@
             // 
             // panelMain
             // 
+            this.panelMain.Controls.Add(this.labelKeyInfo);
+            this.panelMain.Controls.Add(this.linkLabelKeyInfo);
             this.panelMain.Controls.Add(this.buttonClearResults);
             this.panelMain.Controls.Add(this.numericUpDownDaysForDetach);
             this.panelMain.Controls.Add(this.labelNumberOfDaysForDetach);
@@ -87,6 +89,7 @@
             this.numericUpDownDaysForDetach.Name = "numericUpDownDaysForDetach";
             this.numericUpDownDaysForDetach.Size = new System.Drawing.Size(60, 20);
             this.numericUpDownDaysForDetach.TabIndex = 8;
+            this.numericUpDownDaysForDetach.ValueChanged += new System.EventHandler(this.numericUpDownDaysForDetach_ValueChanged);
             // 
             // labelNumberOfDaysForDetach
             // 
@@ -189,20 +192,22 @@
             this.labelIntro.TabIndex = 2;
             this.labelIntro.Text = "Please login first!";
             // 
-            // label1
+            // labelCurrentLicense
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 43);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Current license:";
+            this.labelCurrentLicense.AutoSize = true;
+            this.labelCurrentLicense.Enabled = false;
+            this.labelCurrentLicense.Location = new System.Drawing.Point(220, 47);
+            this.labelCurrentLicense.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCurrentLicense.Name = "labelCurrentLicense";
+            this.labelCurrentLicense.Size = new System.Drawing.Size(80, 13);
+            this.labelCurrentLicense.TabIndex = 7;
+            this.labelCurrentLicense.Text = "Current license:";
             // 
             // linkLabelLicenseStatus
             // 
             this.linkLabelLicenseStatus.AutoSize = true;
-            this.linkLabelLicenseStatus.Location = new System.Drawing.Point(96, 43);
+            this.linkLabelLicenseStatus.Enabled = false;
+            this.linkLabelLicenseStatus.Location = new System.Drawing.Point(305, 47);
             this.linkLabelLicenseStatus.Name = "linkLabelLicenseStatus";
             this.linkLabelLicenseStatus.Size = new System.Drawing.Size(16, 13);
             this.linkLabelLicenseStatus.TabIndex = 8;
@@ -223,7 +228,8 @@
             // labelKeyInfo
             // 
             this.labelKeyInfo.AutoSize = true;
-            this.labelKeyInfo.Location = new System.Drawing.Point(262, 43);
+            this.labelKeyInfo.Enabled = false;
+            this.labelKeyInfo.Location = new System.Drawing.Point(209, -2);
             this.labelKeyInfo.Name = "labelKeyInfo";
             this.labelKeyInfo.Size = new System.Drawing.Size(51, 13);
             this.labelKeyInfo.TabIndex = 9;
@@ -232,10 +238,11 @@
             // linkLabelKeyInfo
             // 
             this.linkLabelKeyInfo.AutoSize = true;
-            this.linkLabelKeyInfo.Location = new System.Drawing.Point(319, 43);
+            this.linkLabelKeyInfo.Enabled = false;
+            this.linkLabelKeyInfo.Location = new System.Drawing.Point(266, -2);
             this.linkLabelKeyInfo.Name = "linkLabelKeyInfo";
             this.linkLabelKeyInfo.Size = new System.Drawing.Size(16, 13);
-            this.linkLabelKeyInfo.TabIndex = 10;
+            this.linkLabelKeyInfo.TabIndex = 9;
             this.linkLabelKeyInfo.TabStop = true;
             this.linkLabelKeyInfo.Text = "...";
             this.linkLabelKeyInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelKeyInfo_LinkClicked);
@@ -245,11 +252,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(442, 321);
-            this.Controls.Add(this.linkLabelKeyInfo);
-            this.Controls.Add(this.labelKeyInfo);
             this.Controls.Add(this.linkLabelLicenseStatus);
             this.Controls.Add(this.labelIntro);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelCurrentLicense);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.buttonLoginLogout);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -279,7 +284,7 @@
         private System.Windows.Forms.TextBox textBoxSourceText;
         private System.Windows.Forms.Label labelSourceText;
         private System.Windows.Forms.Label labelIntro;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelCurrentLicense;
         private System.Windows.Forms.LinkLabel linkLabelLicenseStatus;
         private System.Windows.Forms.Button buttonClearResults;
         private System.Windows.Forms.Label labelKeyInfo;

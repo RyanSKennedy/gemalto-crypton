@@ -28,7 +28,38 @@ namespace Crypton
         public static HaspStatus myStatus = HaspStatus.AlreadyLoggedOut;
         public static HaspFeature myFeature = new HaspFeature(10001);
         public static Hasp myHasp = new Hasp(myFeature);
+        
         public static string baseDir = MyGlobalMethods.GetBaseDir();
+        
+        public static string formatForGetId = "<haspformat root=\"location\">" +
+                                              "   <license_manager>" +
+                                              "      <attribute name=\"id\"/>" +
+                                              "      <attribute name=\"time\"/>" +
+                                              "      <element name=\"hostname\"/>" +
+                                              "      <element name=\"version\"/>" +
+                                              "      <element name=\"host_fingerprint\"/>" +
+                                              "   </license_manager>" +
+                                              "</haspformat>";
+        public static string formatForGetProductId = "<haspformat>" +
+                                                     "    <product>" +
+                                                     "        <element name=\"id\"/>" +
+                                                     "        <attribute name=\"name\"/>" +
+                                                     "    </product>" + 
+                                                     "</haspformat>";
+        public static string scopeForLocal = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                                             "<haspscope>" +
+                                             "    <license_manager hostname=\"localhost\" />" +
+                                             "</haspscope>";
+        public static string actionForDetach = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
+                                               "<detach>" +
+                                               "   <product id=\"{PRODUCT_ID}\">" +
+                                               "      <duration>{NUMBER_OF_SECONDS}</duration>" +
+                                               "   </product>" + 
+                                               "</detach>";
+        public static string scopeForSpecificKeyId = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                                                     "<haspscope>" +
+                                                     "    <hasp id=\"{KEY_ID}\"/>" +
+                                                     "</haspscope>";
 
         public Variables () {}
     }
