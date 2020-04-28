@@ -18,9 +18,13 @@ namespace Crypton
         public string productId;
         public XDocument keyInfo;
         public XDocument productInfo;
+        FormSettings SettingsWindow;
+
         public FormMain()
         {
             InitializeComponent();
+
+            SettingsWindow = new FormSettings();
         }
 
         private void buttonLoginLogout_Click(object sender, EventArgs e)
@@ -31,7 +35,7 @@ namespace Crypton
                 if (Variables.myStatus == HaspStatus.StatusOk)
                 {
                     buttonLoginLogout.Text = "Logout";
-                    linkLabelLicenseStatus.Text = "Status OK!";
+                    linkLabelLicenseStatus.Text = Variables.myStatus.ToString();
                     keyInfo = XDocument.Parse(GetSessionInfo("<haspformat format=\"keyinfo\"/>"));
                     productInfo = XDocument.Parse(GetSessionInfo(Variables.formatForGetProductId));
                     keyId = keyInfo.Descendants().FirstOrDefault(p => p.Name.LocalName == "haspid").Value;
@@ -42,8 +46,15 @@ namespace Crypton
                     {
                         labelNumberOfDaysForDetach.Enabled = true;
                         numericUpDownDaysForDetach.Enabled = true;
+                        buttonDetach.Enabled = true;
                     }
-                    
+                    else
+                    {
+                        labelNumberOfDaysForDetach.Enabled = false;
+                        numericUpDownDaysForDetach.Enabled = false;
+                        buttonDetach.Enabled = false;
+                    }
+
                     labelIntro.Text = "Login successfully!";
                     labelIntro.ForeColor = Color.Green;
                     panelMain.Enabled = true;
@@ -54,7 +65,7 @@ namespace Crypton
                 }
                 else 
                 {
-                    linkLabelLicenseStatus.Text = "Login Error: " + Variables.myStatus.ToString();
+                    linkLabelLicenseStatus.Text = Variables.myStatus.ToString();
                     labelIntro.Text = "Please login first!";
                     labelIntro.ForeColor = Color.Black;
                     panelMain.Enabled = false;
@@ -131,6 +142,11 @@ namespace Crypton
                 Variables.myStatus = Hasp.Update(info, ref ack);
 
                 if (Variables.myStatus == HaspStatus.StatusOk)
+                {
+                    //handle success
+                    MessageBox.Show("Current status of the opperation is: " + Variables.myStatus.ToString() + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Detached!");
+                }
+                else 
                 {
                     //handle error
                     MessageBox.Show(Variables.myStatus.ToString(), "Detaching apply update error!");
@@ -220,6 +236,11 @@ namespace Crypton
                 }
             }
             return getRecipientStatus.ToString();
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            SettingsWindow.ShowDialog();
         }
     }
 }
