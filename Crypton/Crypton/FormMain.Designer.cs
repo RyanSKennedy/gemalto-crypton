@@ -44,8 +44,11 @@
             this.labelSourceText = new System.Windows.Forms.Label();
             this.labelIntro = new System.Windows.Forms.Label();
             this.labelCurrentLicense = new System.Windows.Forms.Label();
-            this.linkLabelLicenseStatus = new System.Windows.Forms.LinkLabel();
+            this.linkLabelLicenseInfo = new System.Windows.Forms.LinkLabel();
             this.buttonSettings = new System.Windows.Forms.Button();
+            this.buttonCancelDetach = new System.Windows.Forms.Button();
+            this.labelLoginStatus = new System.Windows.Forms.Label();
+            this.labelLoginStatusCode = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDaysForDetach)).BeginInit();
             this.SuspendLayout();
@@ -63,8 +66,7 @@
             // 
             // panelMain
             // 
-            this.panelMain.Controls.Add(this.labelKeyInfo);
-            this.panelMain.Controls.Add(this.linkLabelKeyInfo);
+            this.panelMain.Controls.Add(this.buttonCancelDetach);
             this.panelMain.Controls.Add(this.buttonClearResults);
             this.panelMain.Controls.Add(this.numericUpDownDaysForDetach);
             this.panelMain.Controls.Add(this.labelNumberOfDaysForDetach);
@@ -76,17 +78,17 @@
             this.panelMain.Controls.Add(this.textBoxSourceText);
             this.panelMain.Controls.Add(this.labelSourceText);
             this.panelMain.Enabled = false;
-            this.panelMain.Location = new System.Drawing.Point(11, 68);
+            this.panelMain.Location = new System.Drawing.Point(11, 110);
             this.panelMain.Margin = new System.Windows.Forms.Padding(2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(420, 253);
+            this.panelMain.Size = new System.Drawing.Size(420, 283);
             this.panelMain.TabIndex = 1;
             // 
             // labelKeyInfo
             // 
             this.labelKeyInfo.AutoSize = true;
             this.labelKeyInfo.Enabled = false;
-            this.labelKeyInfo.Location = new System.Drawing.Point(209, -2);
+            this.labelKeyInfo.Location = new System.Drawing.Point(11, 95);
             this.labelKeyInfo.Name = "labelKeyInfo";
             this.labelKeyInfo.Size = new System.Drawing.Size(51, 13);
             this.labelKeyInfo.TabIndex = 9;
@@ -96,7 +98,7 @@
             // 
             this.linkLabelKeyInfo.AutoSize = true;
             this.linkLabelKeyInfo.Enabled = false;
-            this.linkLabelKeyInfo.Location = new System.Drawing.Point(266, -2);
+            this.linkLabelKeyInfo.Location = new System.Drawing.Point(58, 95);
             this.linkLabelKeyInfo.Name = "linkLabelKeyInfo";
             this.linkLabelKeyInfo.Size = new System.Drawing.Size(16, 13);
             this.linkLabelKeyInfo.TabIndex = 9;
@@ -106,9 +108,9 @@
             // 
             // buttonClearResults
             // 
-            this.buttonClearResults.Location = new System.Drawing.Point(2, 220);
+            this.buttonClearResults.Location = new System.Drawing.Point(317, 219);
             this.buttonClearResults.Name = "buttonClearResults";
-            this.buttonClearResults.Size = new System.Drawing.Size(80, 22);
+            this.buttonClearResults.Size = new System.Drawing.Size(100, 22);
             this.buttonClearResults.TabIndex = 9;
             this.buttonClearResults.Text = "Clear Results";
             this.buttonClearResults.UseVisualStyleBackColor = true;
@@ -117,10 +119,10 @@
             // numericUpDownDaysForDetach
             // 
             this.numericUpDownDaysForDetach.Enabled = false;
-            this.numericUpDownDaysForDetach.Location = new System.Drawing.Point(254, 221);
+            this.numericUpDownDaysForDetach.Location = new System.Drawing.Point(139, 248);
             this.numericUpDownDaysForDetach.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownDaysForDetach.Name = "numericUpDownDaysForDetach";
-            this.numericUpDownDaysForDetach.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDownDaysForDetach.Size = new System.Drawing.Size(69, 20);
             this.numericUpDownDaysForDetach.TabIndex = 8;
             this.numericUpDownDaysForDetach.ValueChanged += new System.EventHandler(this.numericUpDownDaysForDetach_ValueChanged);
             // 
@@ -128,7 +130,7 @@
             // 
             this.labelNumberOfDaysForDetach.AutoSize = true;
             this.labelNumberOfDaysForDetach.Enabled = false;
-            this.labelNumberOfDaysForDetach.Location = new System.Drawing.Point(117, 224);
+            this.labelNumberOfDaysForDetach.Location = new System.Drawing.Point(2, 250);
             this.labelNumberOfDaysForDetach.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNumberOfDaysForDetach.Name = "labelNumberOfDaysForDetach";
             this.labelNumberOfDaysForDetach.Size = new System.Drawing.Size(133, 13);
@@ -138,7 +140,7 @@
             // buttonDetach
             // 
             this.buttonDetach.Enabled = false;
-            this.buttonDetach.Location = new System.Drawing.Point(318, 219);
+            this.buttonDetach.Location = new System.Drawing.Point(212, 247);
             this.buttonDetach.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDetach.Name = "buttonDetach";
             this.buttonDetach.Size = new System.Drawing.Size(100, 22);
@@ -229,51 +231,86 @@
             // 
             this.labelCurrentLicense.AutoSize = true;
             this.labelCurrentLicense.Enabled = false;
-            this.labelCurrentLicense.Location = new System.Drawing.Point(220, 47);
+            this.labelCurrentLicense.Location = new System.Drawing.Point(11, 76);
             this.labelCurrentLicense.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCurrentLicense.Name = "labelCurrentLicense";
             this.labelCurrentLicense.Size = new System.Drawing.Size(80, 13);
             this.labelCurrentLicense.TabIndex = 7;
             this.labelCurrentLicense.Text = "Current license:";
             // 
-            // linkLabelLicenseStatus
+            // linkLabelLicenseInfo
             // 
-            this.linkLabelLicenseStatus.AutoSize = true;
-            this.linkLabelLicenseStatus.Enabled = false;
-            this.linkLabelLicenseStatus.Location = new System.Drawing.Point(305, 47);
-            this.linkLabelLicenseStatus.Name = "linkLabelLicenseStatus";
-            this.linkLabelLicenseStatus.Size = new System.Drawing.Size(16, 13);
-            this.linkLabelLicenseStatus.TabIndex = 8;
-            this.linkLabelLicenseStatus.TabStop = true;
-            this.linkLabelLicenseStatus.Text = "...";
-            this.linkLabelLicenseStatus.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLicenseStatus_LinkClicked);
+            this.linkLabelLicenseInfo.AutoSize = true;
+            this.linkLabelLicenseInfo.Enabled = false;
+            this.linkLabelLicenseInfo.Location = new System.Drawing.Point(90, 76);
+            this.linkLabelLicenseInfo.Name = "linkLabelLicenseInfo";
+            this.linkLabelLicenseInfo.Size = new System.Drawing.Size(16, 13);
+            this.linkLabelLicenseInfo.TabIndex = 8;
+            this.linkLabelLicenseInfo.TabStop = true;
+            this.linkLabelLicenseInfo.Text = "...";
+            this.linkLabelLicenseInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLicenseStatus_LinkClicked);
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(11, 46);
+            this.buttonSettings.Location = new System.Drawing.Point(355, 46);
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(55, 22);
+            this.buttonSettings.Size = new System.Drawing.Size(75, 22);
             this.buttonSettings.TabIndex = 9;
             this.buttonSettings.Text = "Settings";
             this.buttonSettings.UseVisualStyleBackColor = true;
             this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
             // 
+            // buttonCancelDetach
+            // 
+            this.buttonCancelDetach.Enabled = false;
+            this.buttonCancelDetach.Location = new System.Drawing.Point(317, 247);
+            this.buttonCancelDetach.Name = "buttonCancelDetach";
+            this.buttonCancelDetach.Size = new System.Drawing.Size(100, 22);
+            this.buttonCancelDetach.TabIndex = 10;
+            this.buttonCancelDetach.Text = "Return license";
+            this.buttonCancelDetach.UseVisualStyleBackColor = true;
+            this.buttonCancelDetach.Click += new System.EventHandler(this.buttonCancelDetach_Click);
+            // 
+            // labelLoginStatus
+            // 
+            this.labelLoginStatus.AutoSize = true;
+            this.labelLoginStatus.Enabled = false;
+            this.labelLoginStatus.Location = new System.Drawing.Point(11, 57);
+            this.labelLoginStatus.Name = "labelLoginStatus";
+            this.labelLoginStatus.Size = new System.Drawing.Size(67, 13);
+            this.labelLoginStatus.TabIndex = 10;
+            this.labelLoginStatus.Text = "Login status:";
+            // 
+            // labelLoginStatusCode
+            // 
+            this.labelLoginStatusCode.AutoSize = true;
+            this.labelLoginStatusCode.Enabled = false;
+            this.labelLoginStatusCode.Location = new System.Drawing.Point(77, 57);
+            this.labelLoginStatusCode.Name = "labelLoginStatusCode";
+            this.labelLoginStatusCode.Size = new System.Drawing.Size(16, 13);
+            this.labelLoginStatusCode.TabIndex = 11;
+            this.labelLoginStatusCode.Text = "...";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 321);
+            this.ClientSize = new System.Drawing.Size(442, 391);
+            this.Controls.Add(this.labelLoginStatusCode);
+            this.Controls.Add(this.labelLoginStatus);
+            this.Controls.Add(this.labelKeyInfo);
+            this.Controls.Add(this.linkLabelKeyInfo);
             this.Controls.Add(this.buttonSettings);
-            this.Controls.Add(this.linkLabelLicenseStatus);
+            this.Controls.Add(this.linkLabelLicenseInfo);
             this.Controls.Add(this.labelIntro);
             this.Controls.Add(this.labelCurrentLicense);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.buttonLoginLogout);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximumSize = new System.Drawing.Size(458, 360);
-            this.MinimumSize = new System.Drawing.Size(458, 360);
+            this.MaximumSize = new System.Drawing.Size(458, 430);
+            this.MinimumSize = new System.Drawing.Size(458, 430);
             this.Name = "FormMain";
-            this.Text = "Crypton";
+            this.Text = "Cloud Thales CAD-CAM";
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDaysForDetach)).EndInit();
@@ -297,11 +334,14 @@
         private System.Windows.Forms.Label labelSourceText;
         private System.Windows.Forms.Label labelIntro;
         private System.Windows.Forms.Label labelCurrentLicense;
-        private System.Windows.Forms.LinkLabel linkLabelLicenseStatus;
+        private System.Windows.Forms.LinkLabel linkLabelLicenseInfo;
         private System.Windows.Forms.Button buttonClearResults;
         private System.Windows.Forms.Label labelKeyInfo;
         private System.Windows.Forms.LinkLabel linkLabelKeyInfo;
         private System.Windows.Forms.Button buttonSettings;
+        private System.Windows.Forms.Button buttonCancelDetach;
+        private System.Windows.Forms.Label labelLoginStatus;
+        private System.Windows.Forms.Label labelLoginStatusCode;
     }
 }
 
