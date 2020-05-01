@@ -8,19 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Crypton
+namespace Cloud_Thales_CAD_CAM
 {
     public partial class FormSettings : Form
     {
         public FormSettings()
         {
             InitializeComponent();
+
+            comboBoxMethodsForDetach.SelectedIndex = 0;
         }
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
             numericUpDownFeatureId.Value = Variables.myFeature.FeatureId;
-            textBoxAdminApiPassword.Text = Variables.adminApiPassword;
         }
 
         private void numericUpDownFeatureId_ValueChanged(object sender, EventArgs e)
@@ -48,28 +49,9 @@ namespace Crypton
             Variables.specifyKeyId = textBoxSpecifyKeyId.Text;
         }
 
-        private void checkBoxUseAdminApi_CheckedChanged(object sender, EventArgs e)
+        private void comboBoxMethodsForDetach_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkBoxUseAdminApi.Checked == true)
-            {
-                Variables.useAdminApi = true;
-                textBoxAdminApiPassword.Enabled = true;
-            }
-            else 
-            {
-                Variables.useAdminApi = false;
-                textBoxAdminApiPassword.Enabled = false;
-            }
-        }
-
-        private void textBoxAdminApiPassword_TextChanged(object sender, EventArgs e)
-        {
-            Variables.adminApiPassword = textBoxAdminApiPassword.Text;
-        }
-
-        private void checkBoxUseUrlForDetachLicense_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxUseUrlForDetachLicense.Checked == true)
+            if (comboBoxMethodsForDetach.SelectedItem.ToString() == "Via ACC Url (Recommended)")
             {
                 Variables.useUrl = true;
             }

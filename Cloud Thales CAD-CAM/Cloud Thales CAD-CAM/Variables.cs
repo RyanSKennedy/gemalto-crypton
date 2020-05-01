@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aladdin.HASP;
 
-namespace Crypton
+namespace Cloud_Thales_CAD_CAM
 {
     public class Variables
     {
@@ -32,25 +32,23 @@ namespace Crypton
         public static bool connectToSpecifyKeyId = false;
 
         public static string urlForCancelDetachLicense = @"http://{HOST}:{PORT}/_int_/cancel2.html?haspid={KEY_ID}&vendorid={VENDOR_ID}&productid={PRODUCT_ID}";
-        public static string adminApiHost = "127.0.0.1";
-        public static string adminApiPortStr = "1947";
-        public static ushort adminApiPort = Convert.ToUInt16(adminApiPortStr);
-        public static string adminApiPassword = "";
-        public static bool useAdminApi = false;
+        public static string accHost = "127.0.0.1";
+        public static string accPortStr = "1947";
+        public static ushort accPort = Convert.ToUInt16(accPortStr);
         public static bool useUrl = true;
 
         public static string baseDir = MyGlobalMethods.GetBaseDir();
         
-        public static string formatForGetChildKeyId = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                                                      "<haspformat root=\"hasp_info\">" +
-                                                      "    <hasp>" +
-                                                      "        <attribute name=\"id\" />" +
-                                                      "        <attribute name=\"type\" />" +
-                                                      "        <feature>" +
-                                                      "            <attribute name=\"id\" />" +
-                                                      "        </feature>" +
-                                                      "    </hasp>" +
-                                                      "</haspformat>";
+        public static string formatForGetAvailableLicenses = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                                                             "<haspformat root=\"hasp_info\">" +
+                                                             "    <hasp>" +
+                                                             "        <attribute name=\"id\" />" +
+                                                             "        <attribute name=\"type\" />" +
+                                                             "        <feature>" +
+                                                             "            <attribute name=\"id\" />" +
+                                                             "        </feature>" +
+                                                             "    </hasp>" +
+                                                             "</haspformat>";
 
         public static string formatForGetId = "<haspformat root=\"location\">" +
                                               "   <license_manager>" +
@@ -84,6 +82,9 @@ namespace Crypton
                                              "<haspscope>" +
                                              "    <license_manager hostname=\"localhost\" />" +
                                              "</haspscope>";
+
+        public static string scopeUnfiltered = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" + 
+                                               "<haspscope/>";
 
         public static string actionForDetach = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
                                                "<detach>" +

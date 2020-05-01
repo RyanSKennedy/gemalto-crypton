@@ -3,20 +3,17 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Aladdin.HASP;
-using SafeNet.Sentinel;
 
 
-namespace Crypton
+namespace Cloud_Thales_CAD_CAM
 {
     public partial class FormMain : Form
     {
-        public HttpClient httpClient;
         public string vendorId;
-        public string parentKeyId;
+        public static string parentKeyId;
         public string childKeyId;
         public string productId;
         public string productName;
@@ -55,9 +52,9 @@ namespace Crypton
                 if (Variables.myStatus == HaspStatus.StatusOk)
                 {
                     buttonLoginLogout.Text = "Logout";
-                    keyInfo = XDocument.Parse(GetSessionInfo("<haspformat format=\"keyinfo\"/>"));
-                    productInfo = XDocument.Parse(GetSessionInfo(Variables.formatForGetProductId));
-                    featureInfo = XDocument.Parse(GetSessionInfo(Variables.formatForGetFeatureId));
+                    keyInfo = XDocument.Parse(MyGlobalMethods.GetSessionInfo("<haspformat format=\"keyinfo\"/>"));
+                    productInfo = XDocument.Parse(MyGlobalMethods.GetSessionInfo(Variables.formatForGetProductId));
+                    featureInfo = XDocument.Parse(MyGlobalMethods.GetSessionInfo(Variables.formatForGetFeatureId));
                     parentKeyId = keyInfo.Descendants().FirstOrDefault(p => p.Name.LocalName == "haspid").Value;
                     productId = productInfo.Descendants().FirstOrDefault(p => p.Name.LocalName == "id").Value;
                     productName = productInfo.Descendants().FirstOrDefault(p => p.Name.LocalName == "name").Value;
@@ -91,6 +88,7 @@ namespace Crypton
                     linkLabelLicenseInfo.Enabled = true;
                     labelKeyInfo.Enabled = true;
                     linkLabelKeyInfo.Enabled = true;
+                    buttonCheckAvailableLicenses.Enabled = false;
                 }
                 else 
                 {
@@ -124,7 +122,22 @@ namespace Crypton
                 linkLabelLicenseInfo.Enabled = false;
                 labelKeyInfo.Enabled = false;
                 linkLabelKeyInfo.Enabled = false;
+                buttonCheckAvailableLicenses.Enabled = true;
             }
+        }
+
+        private void buttonCheckAvailableLicenses_Click(object sender, EventArgs e)
+        {
+            var availableLicenses = MyGlobalMethods.GetInfo(Variables.scopeUnfiltered, Variables.formatForGetAvailableLicenses, true);
+
+            MessageBox.Show(availableLicenses, "Available Licenses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            Variables.myStatus = HaspStatus.AlreadyLoggedOut;
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            SettingsWindow.ShowDialog();
         }
 
         private void buttonEncrypt_Click(object sender, EventArgs e)
@@ -161,7 +174,7 @@ namespace Crypton
 
         private void buttonDetach_Click(object sender, EventArgs e)
         {
-            var myId = GetInfo(Variables.scopeForLocal, Variables.formatForGetId);
+            var myId = MyGlobalMethods.GetInfo(Variables.scopeForLocal, Variables.formatForGetId);
 
             string info = null;
             int detachingTime = (Convert.ToInt32(numericUpDownDaysForDetach.Value) * 24 * 60 * 60);
@@ -177,7 +190,7 @@ namespace Crypton
                 if (myUpdateStatus == HaspStatus.StatusOk)
                 {
                     //handle success
-                    var tmpAvaliablesKeys = XDocument.Parse(GetInfo(Variables.scopeForLocal, Variables.formatForGetChildKeyId));
+                    var tmpAvaliablesKeys = XDocument.Parse(MyGlobalMethods.GetInfo(Variables.scopeForLocal, Variables.formatForGetAvailableLicenses));
                     foreach (var el in tmpAvaliablesKeys.Root.Elements("hasp")) 
                     {
                         foreach (var el2 in el.Elements("feature"))
@@ -205,59 +218,67 @@ namespace Crypton
             }
             else 
             {
-                if (myDetachStatus == HaspStatus.InvalidDuration)
+                if (myDetachStatus == HaspStatus.InvalidDuration && !Variables.useUrl)
                 {
-                    var tmpAvaliablesKeys = XDocument.Parse(GetInfo(Variables.scopeForLocal, Variables.formatForGetChildKeyId));
-                    foreach (var el in tmpAvaliablesKeys.Root.Elements("hasp"))
+                    try
                     {
-                        foreach (var el2 in el.Elements("feature"))
+                        var tmpAvaliablesKeys = XDocument.Parse(MyGlobalMethods.GetInfo(Variables.scopeForLocal, Variables.formatForGetAvailableLicenses));
+                        foreach (var el in tmpAvaliablesKeys.Root.Elements("hasp"))
                         {
-                            if (el2.Attribute("id").Value == Variables.myFeature.FeatureId.ToString())
+                            foreach (var el2 in el.Elements("feature"))
                             {
-                                childKeyId = el.Attribute("id").Value;
+                                if (el2.Attribute("id").Value == Variables.myFeature.FeatureId.ToString())
+                                {
+                                    childKeyId = el.Attribute("id").Value;
+                                    break;
+                                }
+                            }
+
+                            if (String.IsNullOrEmpty(childKeyId))
+                            {
                                 break;
                             }
                         }
 
-                        if (String.IsNullOrEmpty(childKeyId))
+                        string myCancelDetachStatus = MyGlobalMethods.CancelDetachViaUrl(productId, childKeyId);
+
+                        if (myCancelDetachStatus == HttpStatusCode.OK.ToString())
                         {
-                            break;
-                        }
-                    }
+                            myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
 
-                    string myCancelDetachStatus = CancelDetachViaUrl(childKeyId);
-
-                    if (myCancelDetachStatus == HttpStatusCode.OK.ToString())
-                    {
-                        myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
-
-                        if (myDetachStatus == HaspStatus.StatusOk)
-                        {
-                            // hasp_update
-                            string ack = null;
-                            HaspStatus myUpdateStatus = Hasp.Update(info, ref ack);
-
-                            if (myUpdateStatus == HaspStatus.StatusOk)
+                            if (myDetachStatus == HaspStatus.StatusOk)
                             {
-                                //handle success
-                                MessageBox.Show("Current status of the opperation is: " + myUpdateStatus.ToString() + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Detached!");
+                                // hasp_update
+                                string ack = null;
+                                HaspStatus myUpdateStatus = Hasp.Update(info, ref ack);
+
+                                if (myUpdateStatus == HaspStatus.StatusOk)
+                                {
+                                    //handle success
+                                    MessageBox.Show("Current status of the opperation is: " + myUpdateStatus.ToString() + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Detached!");
+                                }
+                                else
+                                {
+                                    //handle error
+                                    MessageBox.Show(myUpdateStatus.ToString(), "Detaching apply update error!");
+                                }
                             }
                             else
                             {
                                 //handle error
-                                MessageBox.Show(myUpdateStatus.ToString(), "Detaching apply update error!");
+                                MessageBox.Show(myDetachStatus.ToString(), "Re-Detaching error!");
                             }
                         }
-                        else 
+                        else
                         {
                             //handle error
-                            MessageBox.Show(myDetachStatus.ToString(), "Re-Detaching error!");
+                            MessageBox.Show("Status request: " + myCancelDetachStatus + Environment.NewLine + "Something goes wrong... Please, try again later!", "Cancel Detaching error (In Re-Detach)!");
                         }
                     }
-                    else
+                    catch 
                     {
-                        //handle error
-                        MessageBox.Show("Status request: " + myCancelDetachStatus + Environment.NewLine + "Something goes wrong... Please, try again later!", "Cancel Detaching error (In Re-Detach)!");
+                        // do nothing...
+                        MessageBox.Show(myDetachStatus.ToString(), "Detaching error!");
                     }
                 }
                 else 
@@ -272,11 +293,7 @@ namespace Crypton
         {
             if (Variables.useUrl)
             {
-                /*httpClient = new HttpClient();
-                Uri fullUri = new Uri(Variables.urlForCancelDetachLicense.Replace("{HOST}", Variables.adminApiHost).Replace("{PORT}", Variables.adminApiPortStr).Replace("{KEY_ID}", keyId).Replace("{VENDOR_ID}", Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault().Value).Replace("{PRODUCT_ID}", productId));
-                HttpResponseMessage httpClientResponse = httpClient.GetAsync(fullUri).Result;*/
-
-                string myCancelDetachStatus = CancelDetachViaUrl();
+                string myCancelDetachStatus = MyGlobalMethods.CancelDetachViaUrl(productId);
 
                 if (myCancelDetachStatus == HttpStatusCode.OK.ToString())
                 {
@@ -293,11 +310,7 @@ namespace Crypton
             }
             else 
             {
-                /*var myId = GetInfo(Variables.scopeForLocal, Variables.formatForGetId);
-
-                string info = null;*/
-
-                string myCancelDetachStatus = CancelDetachViaLicensingApi();
+                string myCancelDetachStatus = MyGlobalMethods.CancelDetachViaLicensingApi(parentKeyId);
 
                 if (myCancelDetachStatus == HaspStatus.StatusOk.ToString())
                 {
@@ -320,12 +333,12 @@ namespace Crypton
 
         private void linkLabelLicenseStatus_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show(GetSessionInfo("<haspformat format=\"sessioninfo\"/>"), "Session Info");
+            MessageBox.Show(MyGlobalMethods.GetSessionInfo("<haspformat format=\"sessioninfo\"/>"), "Session Info");
         }
 
         private void linkLabelKeyInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show(GetSessionInfo("<haspformat format=\"keyinfo\"/>"), "Key Info");
+            MessageBox.Show(MyGlobalMethods.GetSessionInfo("<haspformat format=\"keyinfo\"/>"), "Key Info");
         }
 
         private void numericUpDownDaysForDetach_ValueChanged(object sender, EventArgs e)
@@ -352,74 +365,6 @@ namespace Crypton
                 buttonEncrypt.Enabled = false;
                 buttonDecrypt.Enabled = false;
             }
-        }
-
-        public string GetSessionInfo(string format)
-        {
-            string info = null;
-            if (Variables.myStatus == HaspStatus.StatusOk)
-            {
-                Variables.myStatus = Variables.myHasp.GetSessionInfo(format, ref info);
-                if (Variables.myStatus == HaspStatus.StatusOk)
-                {
-                    return info;
-                }
-                else
-                {
-                    return Variables.myStatus.ToString();
-                }
-            }
-
-            return Variables.myStatus.ToString();
-        }
-
-        public string GetInfo(string scope, string format)
-        {
-            string info = null;
-            HaspStatus getRecipientStatus = HaspStatus.AlreadyLoggedOut;
-            if (Variables.myStatus == HaspStatus.StatusOk)
-            {
-                getRecipientStatus = Hasp.GetInfo(scope, format, Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], ref info);
-                if (getRecipientStatus == HaspStatus.StatusOk)
-                {
-                    return info;
-                }
-                else
-                {
-                    return getRecipientStatus.ToString();
-                }
-            }
-            return getRecipientStatus.ToString();
-        }
-
-        private void buttonSettings_Click(object sender, EventArgs e)
-        {
-            SettingsWindow.ShowDialog();
-        }
-
-        public string CancelDetachViaUrl(string targetKeyId = "")
-        {
-            if (String.IsNullOrEmpty(targetKeyId)) 
-            {
-                targetKeyId = parentKeyId;
-            }
-
-            httpClient = new HttpClient();
-            Uri fullUri = new Uri(Variables.urlForCancelDetachLicense.Replace("{HOST}", Variables.adminApiHost).Replace("{PORT}", Variables.adminApiPortStr).Replace("{KEY_ID}", targetKeyId).Replace("{VENDOR_ID}", Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault().Value).Replace("{PRODUCT_ID}", productId));
-            HttpResponseMessage httpClientResponse = httpClient.GetAsync(fullUri).Result;
-
-            return httpClientResponse.StatusCode.ToString();
-        }
-
-        public string CancelDetachViaLicensingApi()
-        {
-            var myId = GetInfo(Variables.scopeForLocal, Variables.formatForGetId);
-
-            string info = null;
-
-            HaspStatus myCancelDetachStatus = Hasp.Transfer(Variables.actionForCancelDetach.Replace("{KEY_ID}", parentKeyId), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
-
-            return myCancelDetachStatus.ToString();
         }
     }
 }

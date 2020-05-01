@@ -1,4 +1,4 @@
-﻿namespace Crypton
+﻿namespace Cloud_Thales_CAD_CAM
 {
     partial class FormSettings
     {
@@ -32,9 +32,8 @@
             this.labelFeatureIdForUsing = new System.Windows.Forms.Label();
             this.checkBoxSpecifyKeyIdEnable = new System.Windows.Forms.CheckBox();
             this.textBoxSpecifyKeyId = new System.Windows.Forms.TextBox();
-            this.checkBoxUseAdminApi = new System.Windows.Forms.CheckBox();
-            this.textBoxAdminApiPassword = new System.Windows.Forms.TextBox();
-            this.checkBoxUseUrlForDetachLicense = new System.Windows.Forms.CheckBox();
+            this.comboBoxMethodsForDetach = new System.Windows.Forms.ComboBox();
+            this.labelSelectMethodForDetach = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeatureId)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +46,7 @@
             0,
             0});
             this.numericUpDownFeatureId.Name = "numericUpDownFeatureId";
-            this.numericUpDownFeatureId.Size = new System.Drawing.Size(152, 20);
+            this.numericUpDownFeatureId.Size = new System.Drawing.Size(172, 20);
             this.numericUpDownFeatureId.TabIndex = 0;
             this.numericUpDownFeatureId.ValueChanged += new System.EventHandler(this.numericUpDownFeatureId_ValueChanged);
             // 
@@ -76,58 +75,44 @@
             this.textBoxSpecifyKeyId.Enabled = false;
             this.textBoxSpecifyKeyId.Location = new System.Drawing.Point(170, 38);
             this.textBoxSpecifyKeyId.Name = "textBoxSpecifyKeyId";
-            this.textBoxSpecifyKeyId.Size = new System.Drawing.Size(152, 20);
+            this.textBoxSpecifyKeyId.Size = new System.Drawing.Size(172, 20);
             this.textBoxSpecifyKeyId.TabIndex = 3;
             this.textBoxSpecifyKeyId.TextChanged += new System.EventHandler(this.textBoxSpecifyKeyId_TextChanged);
             // 
-            // checkBoxUseAdminApi
+            // comboBoxMethodsForDetach
             // 
-            this.checkBoxUseAdminApi.AutoSize = true;
-            this.checkBoxUseAdminApi.Enabled = false;
-            this.checkBoxUseAdminApi.Location = new System.Drawing.Point(15, 86);
-            this.checkBoxUseAdminApi.Name = "checkBoxUseAdminApi";
-            this.checkBoxUseAdminApi.Size = new System.Drawing.Size(309, 17);
-            this.checkBoxUseAdminApi.TabIndex = 4;
-            this.checkBoxUseAdminApi.Text = "Use Admin API for cancel Detach, password for Admin API: ";
-            this.checkBoxUseAdminApi.UseVisualStyleBackColor = true;
-            this.checkBoxUseAdminApi.CheckedChanged += new System.EventHandler(this.checkBoxUseAdminApi_CheckedChanged);
+            this.comboBoxMethodsForDetach.FormattingEnabled = true;
+            this.comboBoxMethodsForDetach.Items.AddRange(new object[] {
+            "Via ACC Url (Recommended)",
+            "Via Licesing API "});
+            this.comboBoxMethodsForDetach.Location = new System.Drawing.Point(184, 64);
+            this.comboBoxMethodsForDetach.Name = "comboBoxMethodsForDetach";
+            this.comboBoxMethodsForDetach.Size = new System.Drawing.Size(158, 21);
+            this.comboBoxMethodsForDetach.TabIndex = 7;
+            this.comboBoxMethodsForDetach.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethodsForDetach_SelectedIndexChanged);
             // 
-            // textBoxAdminApiPassword
+            // labelSelectMethodForDetach
             // 
-            this.textBoxAdminApiPassword.Enabled = false;
-            this.textBoxAdminApiPassword.Location = new System.Drawing.Point(12, 109);
-            this.textBoxAdminApiPassword.Name = "textBoxAdminApiPassword";
-            this.textBoxAdminApiPassword.Size = new System.Drawing.Size(310, 20);
-            this.textBoxAdminApiPassword.TabIndex = 5;
-            this.textBoxAdminApiPassword.TextChanged += new System.EventHandler(this.textBoxAdminApiPassword_TextChanged);
-            // 
-            // checkBoxUseUrlForDetachLicense
-            // 
-            this.checkBoxUseUrlForDetachLicense.AutoSize = true;
-            this.checkBoxUseUrlForDetachLicense.Checked = true;
-            this.checkBoxUseUrlForDetachLicense.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxUseUrlForDetachLicense.Location = new System.Drawing.Point(15, 63);
-            this.checkBoxUseUrlForDetachLicense.Name = "checkBoxUseUrlForDetachLicense";
-            this.checkBoxUseUrlForDetachLicense.Size = new System.Drawing.Size(230, 17);
-            this.checkBoxUseUrlForDetachLicense.TabIndex = 6;
-            this.checkBoxUseUrlForDetachLicense.Text = "Use Url for cancel Detach (Recommended)";
-            this.checkBoxUseUrlForDetachLicense.UseVisualStyleBackColor = true;
-            this.checkBoxUseUrlForDetachLicense.CheckedChanged += new System.EventHandler(this.checkBoxUseUrlForDetachLicense_CheckedChanged);
+            this.labelSelectMethodForDetach.AutoSize = true;
+            this.labelSelectMethodForDetach.Location = new System.Drawing.Point(12, 67);
+            this.labelSelectMethodForDetach.Name = "labelSelectMethodForDetach";
+            this.labelSelectMethodForDetach.Size = new System.Drawing.Size(166, 13);
+            this.labelSelectMethodForDetach.TabIndex = 8;
+            this.labelSelectMethodForDetach.Text = "Select method for cancel Detach:";
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 136);
-            this.Controls.Add(this.checkBoxUseUrlForDetachLicense);
-            this.Controls.Add(this.textBoxAdminApiPassword);
-            this.Controls.Add(this.checkBoxUseAdminApi);
+            this.ClientSize = new System.Drawing.Size(354, 96);
+            this.Controls.Add(this.labelSelectMethodForDetach);
+            this.Controls.Add(this.comboBoxMethodsForDetach);
             this.Controls.Add(this.textBoxSpecifyKeyId);
             this.Controls.Add(this.checkBoxSpecifyKeyIdEnable);
             this.Controls.Add(this.labelFeatureIdForUsing);
             this.Controls.Add(this.numericUpDownFeatureId);
-            this.MaximumSize = new System.Drawing.Size(350, 175);
-            this.MinimumSize = new System.Drawing.Size(350, 175);
+            this.MaximumSize = new System.Drawing.Size(370, 135);
+            this.MinimumSize = new System.Drawing.Size(370, 135);
             this.Name = "FormSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
@@ -144,8 +129,7 @@
         private System.Windows.Forms.Label labelFeatureIdForUsing;
         private System.Windows.Forms.CheckBox checkBoxSpecifyKeyIdEnable;
         private System.Windows.Forms.TextBox textBoxSpecifyKeyId;
-        private System.Windows.Forms.CheckBox checkBoxUseAdminApi;
-        private System.Windows.Forms.TextBox textBoxAdminApiPassword;
-        private System.Windows.Forms.CheckBox checkBoxUseUrlForDetachLicense;
+        private System.Windows.Forms.ComboBox comboBoxMethodsForDetach;
+        private System.Windows.Forms.Label labelSelectMethodForDetach;
     }
 }

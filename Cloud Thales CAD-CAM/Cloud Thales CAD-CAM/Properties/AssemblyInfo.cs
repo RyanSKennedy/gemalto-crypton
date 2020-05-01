@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Cloud Thales CAD-CAM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Sample for demo Identity Base Access (IBA).")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Thales group Ltd")]
+[assembly: AssemblyCompany("Gemalto LLC")]
 [assembly: AssemblyProduct("Cloud Thales CAD-CAM")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
