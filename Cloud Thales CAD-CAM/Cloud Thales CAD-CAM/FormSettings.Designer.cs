@@ -34,19 +34,21 @@
             this.textBoxSpecifyKeyId = new System.Windows.Forms.TextBox();
             this.comboBoxMethodsForDetach = new System.Windows.Forms.ComboBox();
             this.labelSelectMethodForDetach = new System.Windows.Forms.Label();
+            this.labelLanguage = new System.Windows.Forms.Label();
+            this.comboBoxSelectLanguage = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFeatureId)).BeginInit();
             this.SuspendLayout();
             // 
             // numericUpDownFeatureId
             // 
-            this.numericUpDownFeatureId.Location = new System.Drawing.Point(170, 12);
+            this.numericUpDownFeatureId.Location = new System.Drawing.Point(222, 12);
             this.numericUpDownFeatureId.Maximum = new decimal(new int[] {
             65471,
             0,
             0,
             0});
             this.numericUpDownFeatureId.Name = "numericUpDownFeatureId";
-            this.numericUpDownFeatureId.Size = new System.Drawing.Size(172, 20);
+            this.numericUpDownFeatureId.Size = new System.Drawing.Size(160, 20);
             this.numericUpDownFeatureId.TabIndex = 0;
             this.numericUpDownFeatureId.ValueChanged += new System.EventHandler(this.numericUpDownFeatureId_ValueChanged);
             // 
@@ -66,16 +68,16 @@
             this.checkBoxSpecifyKeyIdEnable.Name = "checkBoxSpecifyKeyIdEnable";
             this.checkBoxSpecifyKeyIdEnable.Size = new System.Drawing.Size(152, 17);
             this.checkBoxSpecifyKeyIdEnable.TabIndex = 2;
-            this.checkBoxSpecifyKeyIdEnable.Text = "Connect to specifi Key ID: ";
+            this.checkBoxSpecifyKeyIdEnable.Text = "Connect to specify Key ID:";
             this.checkBoxSpecifyKeyIdEnable.UseVisualStyleBackColor = true;
             this.checkBoxSpecifyKeyIdEnable.CheckedChanged += new System.EventHandler(this.checkBoxSpecifyKeyIdEnable_CheckedChanged);
             // 
             // textBoxSpecifyKeyId
             // 
             this.textBoxSpecifyKeyId.Enabled = false;
-            this.textBoxSpecifyKeyId.Location = new System.Drawing.Point(170, 38);
+            this.textBoxSpecifyKeyId.Location = new System.Drawing.Point(222, 38);
             this.textBoxSpecifyKeyId.Name = "textBoxSpecifyKeyId";
-            this.textBoxSpecifyKeyId.Size = new System.Drawing.Size(172, 20);
+            this.textBoxSpecifyKeyId.Size = new System.Drawing.Size(160, 20);
             this.textBoxSpecifyKeyId.TabIndex = 3;
             this.textBoxSpecifyKeyId.TextChanged += new System.EventHandler(this.textBoxSpecifyKeyId_TextChanged);
             // 
@@ -83,11 +85,11 @@
             // 
             this.comboBoxMethodsForDetach.FormattingEnabled = true;
             this.comboBoxMethodsForDetach.Items.AddRange(new object[] {
-            "Via ACC Url (Recommended)",
-            "Via Licesing API "});
-            this.comboBoxMethodsForDetach.Location = new System.Drawing.Point(184, 64);
+            "ACC Url (Recommended)",
+            "Licesing API "});
+            this.comboBoxMethodsForDetach.Location = new System.Drawing.Point(222, 64);
             this.comboBoxMethodsForDetach.Name = "comboBoxMethodsForDetach";
-            this.comboBoxMethodsForDetach.Size = new System.Drawing.Size(158, 21);
+            this.comboBoxMethodsForDetach.Size = new System.Drawing.Size(160, 21);
             this.comboBoxMethodsForDetach.TabIndex = 7;
             this.comboBoxMethodsForDetach.SelectedIndexChanged += new System.EventHandler(this.comboBoxMethodsForDetach_SelectedIndexChanged);
             // 
@@ -100,19 +102,39 @@
             this.labelSelectMethodForDetach.TabIndex = 8;
             this.labelSelectMethodForDetach.Text = "Select method for cancel Detach:";
             // 
+            // labelLanguage
+            // 
+            this.labelLanguage.AutoSize = true;
+            this.labelLanguage.Location = new System.Drawing.Point(12, 94);
+            this.labelLanguage.Name = "labelLanguage";
+            this.labelLanguage.Size = new System.Drawing.Size(116, 13);
+            this.labelLanguage.TabIndex = 10;
+            this.labelLanguage.Text = "Select language for UI:";
+            // 
+            // comboBoxSelectLanguage
+            // 
+            this.comboBoxSelectLanguage.FormattingEnabled = true;
+            this.comboBoxSelectLanguage.Location = new System.Drawing.Point(222, 91);
+            this.comboBoxSelectLanguage.Name = "comboBoxSelectLanguage";
+            this.comboBoxSelectLanguage.Size = new System.Drawing.Size(160, 21);
+            this.comboBoxSelectLanguage.TabIndex = 9;
+            this.comboBoxSelectLanguage.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectLanguage_SelectedIndexChanged);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 96);
+            this.ClientSize = new System.Drawing.Size(394, 125);
+            this.Controls.Add(this.labelLanguage);
+            this.Controls.Add(this.comboBoxSelectLanguage);
             this.Controls.Add(this.labelSelectMethodForDetach);
             this.Controls.Add(this.comboBoxMethodsForDetach);
             this.Controls.Add(this.textBoxSpecifyKeyId);
             this.Controls.Add(this.checkBoxSpecifyKeyIdEnable);
             this.Controls.Add(this.labelFeatureIdForUsing);
             this.Controls.Add(this.numericUpDownFeatureId);
-            this.MaximumSize = new System.Drawing.Size(370, 135);
-            this.MinimumSize = new System.Drawing.Size(370, 135);
+            this.MaximumSize = new System.Drawing.Size(410, 164);
+            this.MinimumSize = new System.Drawing.Size(410, 164);
             this.Name = "FormSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
@@ -131,5 +153,7 @@
         private System.Windows.Forms.TextBox textBoxSpecifyKeyId;
         private System.Windows.Forms.ComboBox comboBoxMethodsForDetach;
         private System.Windows.Forms.Label labelSelectMethodForDetach;
+        public System.Windows.Forms.Label labelLanguage;
+        public System.Windows.Forms.ComboBox comboBoxSelectLanguage;
     }
 }

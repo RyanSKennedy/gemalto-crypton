@@ -71,6 +71,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="MultiLanguage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MultiLanguage.Designer.cs">
+      <DependentUpon>MultiLanguage.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyGlobalMethods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +103,9 @@
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="AllLanguageInOnePack.alp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

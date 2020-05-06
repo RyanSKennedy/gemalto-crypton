@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <!-- AvailableLanguages -->
+  <AvailableLanguages>
+    <language type="origin" name="En (Default)">English (Default)</language>
+    <language type="translate" name="En">English (Custom)</language>
+    <language type="translate" name="Ru">Russian</language>
+  </AvailableLanguages>
+  <!-- FormMain -->
+  <FormMain>
+    <language type="origin" name="En (Default)">Cloud Thales CAD-CAM</language>
+    <language type="translate" name="En">Cloud Thales CAD-CAM</language>
+    <language type="translate" name="Ru">Cloud Thales CAD-CAM</language>
+  </FormMain>
+  <buttonLoginLogout>
+    <language type="origin" name="En (Default)">Login</language>
+    <language type="translate" name="En">Login</language>
+    <language type="translate" name="Ru">Логин</language>
+  </buttonLoginLogout>
+  <buttonCheckAvailableLicenses>
+    <language type="origin" name="En (Default)">Check available licenses</language>
+    <language type="translate" name="En">Check available licenses</language>
+    <language type="translate" name="Ru">Проверить доступные лицензии</language>
+  </buttonCheckAvailableLicenses>
+  <buttonSettings>
+    <language type="origin" name="En (Default)">Settings</language>
+    <language type="translate" name="En">Settings</language>
+    <language type="translate" name="Ru">Настройки</language>
+  </buttonSettings>
+  <buttonEncrypt>
+    <language type="origin" name="En (Default)">Encrypt</language>
+    <language type="translate" name="En">Encrypt</language>
+    <language type="translate" name="Ru">Зашровать</language>
+  </buttonEncrypt>
+  <buttonDecrypt>
+    <language type="origin" name="En (Default)">Decrypt</language>
+    <language type="translate" name="En">Decrypt</language>
+    <language type="translate" name="Ru">Расшифровать</language>
+  </buttonDecrypt>
+  <buttonClearResults>
+    <language type="origin" name="En (Default)">Clear Results</language>
+    <language type="translate" name="En">Clear Results</language>
+    <language type="translate" name="Ru">Очистить результаты</language>
+  </buttonClearResults>
+  <buttonDetach>
+    <language type="origin" name="En (Default)">Cache the license</language>
+    <language type="translate" name="En">Cache the license</language>
+    <language type="translate" name="Ru">Кэшировать лиуензию</language>
+  </buttonDetach>
+  <buttonCancelDetach>
+    <language type="origin" name="En (Default)">Return license</language>
+    <language type="translate" name="En">Return license</language>
+    <language type="translate" name="Ru">Вернуть лицензию</language>
+  </buttonCancelDetach>
+  <labelIntro>
+    <language type="origin" name="En (Default)">Please login first!</language>
+    <language type="translate" name="En">Please login first!</language>
+    <language type="translate" name="Ru">Пожалуйста, выполните логин!</language>
+  </labelIntro>
+  <labelLoginStatus>
+    <language type="origin" name="En (Default)">Login status:</language>
+    <language type="translate" name="En">Login status:</language>
+    <language type="translate" name="Ru">Логин статус:</language>
+  </labelLoginStatus>
+  <labelCurrentLicense>
+    <language type="origin" name="En (Default)">Current license:</language>
+    <language type="translate" name="En">Current license:</language>
+    <language type="translate" name="Ru">Текущая лицензия:</language>
+  </labelCurrentLicense>
+  <labelKeyInfo>
+    <language type="origin" name="En (Default)">Key info:</language>
+    <language type="translate" name="En">Key info:</language>
+    <language type="translate" name="Ru">Ключ:</language>
+  </labelKeyInfo>
+  <labelSourceText>
+    <language type="origin" name="En (Default)">Source text:</language>
+    <language type="translate" name="En">Source text:</language>
+    <language type="translate" name="Ru">Исходный текст:</language>
+  </labelSourceText>
+  <labelResults>
+    <language type="origin" name="En (Default)">Results:</language>
+    <language type="translate" name="En">Results:</language>
+    <language type="translate" name="Ru">Результаты:</language>
+  </labelResults>
+  <labelNumberOfDaysForDetach>
+    <language type="origin" name="En (Default)">Number of days for Cache:</language>
+    <language type="translate" name="En">Number of days for Cache:</language>
+    <language type="translate" name="Ru">Количество дней для кэша:</language>
+  </labelNumberOfDaysForDetach>
+  <!-- FormSettings -->
+  <FormSettings>
+    <language type="origin" name="En (Default)">Settings</language>
+    <language type="translate" name="En">Settings</language>
+    <language type="translate" name="Ru">Настройки</language>
+  </FormSettings>
+  <checkBoxSpecifyKeyIdEnable>
+    <language type="origin" name="En (Default)">Connect to specify Key ID:</language>
+    <language type="translate" name="En">Connect to specify Key ID:</language>
+    <language type="translate" name="Ru">Подключяться к ключу с ID:</language>
+  </checkBoxSpecifyKeyIdEnable>
+  <labelFeatureIdForUsing>
+    <language type="origin" name="En (Default)">Chouse Feature ID for Sample:</language>
+    <language type="translate" name="En">Chouse Feature ID for Sample:</language>
+    <language type="translate" name="Ru">Выберите FID для работы ПО:</language>
+  </labelFeatureIdForUsing>
+  <labelSelectMethodForDetach>
+    <language type="origin" name="En (Default)">Select method for cancel Detach:</language>
+    <language type="translate" name="En">Select method for cancel Detach:</language>
+    <language type="translate" name="Ru">Выберите метод для отмены Detach:</language>
+  </labelSelectMethodForDetach>
+  <labelLanguage>
+    <language type="origin" name="En (Default)">Select language for UI:</language>
+    <language type="translate" name="En">Select language for UI:</language>
+    <language type="translate" name="Ru">Выберите язык UI:</language>
+  </labelLanguage>
+  <!-- ErrorCodes -->
+  <ErrorCodes>
+    <!-- Internal Errors -->
+    <error>
+      <language type="origin" name="En (Default)">Login successfully!</language>
+      <language type="translate" name="En">Login successfully!</language>
+      <language type="translate" name="Ru">Логин выполнен успешно!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Please login first!</language>
+      <language type="translate" name="En">Please login first!</language>
+      <language type="translate" name="Ru">Вначале выполните логин!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Login</language>
+      <language type="translate" name="En">Login</language>
+      <language type="translate" name="Ru">Подсоединиться</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Logout</language>
+      <language type="translate" name="En">Logout</language>
+      <language type="translate" name="Ru">Отключиться</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Current status of the opperation is: {0} 
+Please, re-login in application, for using LOCALLY license.</language>
+      <language type="translate" name="En">Current status of the opperation is: {0} 
+Please, re-login in application, for using LOCALLY license.</language>
+      <language type="translate" name="Ru">Текущий статус операции: {0} 
+Пожалуйста, пере-логиньтесь в приложении, для использования ЛОКАЛЬНОЙ лицензии.</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Successfully Detached!</language>
+      <language type="translate" name="En">Successfully Detached!</language>
+      <language type="translate" name="Ru">Успешное кэширование лицензии!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Detaching apply update error!</language>
+      <language type="translate" name="En">Detaching apply update error!</language>
+      <language type="translate" name="Ru">Ошибка при применении кэшированной лицензии!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Re-Detaching error!</language>
+      <language type="translate" name="En">Re-Detaching error!</language>
+      <language type="translate" name="Ru">Ошибка при пере-кэшировании лицензии!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Status request: {0} 
+Something goes wrong... Please, try again later!</language>
+      <language type="translate" name="En">Status request: {0} 
+Something goes wrong... Please, try again later!</language>
+      <language type="translate" name="Ru">Статус запроса: {0} 
+Что-то пошло не так... Пожалуйста, попробуйте повторить операцию позже!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Cancel Detaching error (In Re-Detach)!</language>
+      <language type="translate" name="En">Cancel Detaching error (In Re-Detach)!</language>
+      <language type="translate" name="Ru">Ошибка при возврате кэшированной лицензии (при пере-кэшировании)!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Detaching error!</language>
+      <language type="translate" name="En">Detaching error!</language>
+      <language type="translate" name="Ru">Ошибка при кэшировании лицензии!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Current status of the opperation is: {0} 
+Please, re-login in application, for using CLOUD license.</language>
+      <language type="translate" name="En">Current status of the opperation is: {0} 
+Please, re-login in application, for using CLOUD license.</language>
+      <language type="translate" name="Ru">Текущий статус операции: {0} 
+Пожалуйста, пере-логиньтесь в приложении, для использования ОБЛАЧНОЙ лицензии.</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Successfully Canceled Detaching license!</language>
+      <language type="translate" name="En">Successfully Canceled Detaching license!</language>
+      <language type="translate" name="Ru">Лицензия успешно возвращена!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Cancel Detaching error!</language>
+      <language type="translate" name="En">Cancel Detaching error!</language>
+      <language type="translate" name="Ru">Ошибка при возврате временной лицензии!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Available Licenses</language>
+      <language type="translate" name="En">Available Licenses</language>
+      <language type="translate" name="Ru">Доступные лицензии</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Error: </language>
+      <language type="translate" name="En">Error: </language>
+      <language type="translate" name="Ru">Ошибка: </language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Session Info</language>
+      <language type="translate" name="En">Session Info</language>
+      <language type="translate" name="Ru">Информация о сессии</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Key Info</language>
+      <language type="translate" name="En">Key Info</language>
+      <language type="translate" name="Ru">Информация о ключе</language>
+    </error>
+    <!--<error>
+      <language type="origin" name="En (Default)"></language>
+      <language type="translate" name="En"></language>
+      <language type="translate" name="Ru"></language>
+    </error>-->
+  </ErrorCodes>
+</configuration>

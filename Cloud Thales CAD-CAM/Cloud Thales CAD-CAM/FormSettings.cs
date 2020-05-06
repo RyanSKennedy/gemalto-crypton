@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cloud_Thales_CAD_CAM
@@ -15,13 +8,25 @@ namespace Cloud_Thales_CAD_CAM
         public FormSettings()
         {
             InitializeComponent();
-
-            comboBoxMethodsForDetach.SelectedIndex = 0;
+;
+            foreach (var el in FormMain.alpPackSourceXdocument.Root.Elements("AvailableLanguages")) 
+            {
+                foreach (var el2 in el.Elements("language")) 
+                {
+                    comboBoxSelectLanguage.Items.Add(el2.Value);
+                }
+            }
         }
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
+            FormMain.sForm = (FormSettings)Application.OpenForms["FormSettings"];
+            bool isSetAlpFormAbout = FormMain.alp.SetLanguage(FormMain.language.Key, this.Controls, FormMain.sForm);
+
             numericUpDownFeatureId.Value = Variables.myFeature.FeatureId;
+
+            comboBoxSelectLanguage.SelectedIndex = comboBoxSelectLanguage.FindString(FormMain.language.Value);
+            comboBoxMethodsForDetach.SelectedIndex = Variables.useUrl ? 0 : 1;
         }
 
         private void numericUpDownFeatureId_ValueChanged(object sender, EventArgs e)
@@ -51,7 +56,7 @@ namespace Cloud_Thales_CAD_CAM
 
         private void comboBoxMethodsForDetach_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxMethodsForDetach.SelectedItem.ToString() == "Via ACC Url (Recommended)")
+            if (comboBoxMethodsForDetach.SelectedItem.ToString() == "ACC Url (Recommended)")
             {
                 Variables.useUrl = true;
             }
@@ -59,6 +64,16 @@ namespace Cloud_Thales_CAD_CAM
             {
                 Variables.useUrl = false;
             }
+        }
+
+        private void comboBoxSelectLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Language = comboBoxSelectLanguage.SelectedItem.ToString();
+            Properties.Settings.Default.Save();
+
+            FormMain.language = MultiLanguage.ResetLanguage(FormMain.alpPackSourceXdocument);
+            FormMain.alp.SetLanguage(FormMain.language.Key, this.Controls, FormMain.sForm);
+            FormMain.alp.SetLanguage(FormMain.language.Key, FormMain.mForm.Controls, FormMain.mForm);
         }
     }
 }

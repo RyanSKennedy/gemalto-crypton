@@ -9,10 +9,10 @@ namespace Cloud_Thales_CAD_CAM
     {
         public static HttpClient httpClient;
 
-        public MyGlobalMethods() 
-        {}
+        public MyGlobalMethods()
+        { }
 
-        public static string GetBaseDir() 
+        public static string GetBaseDir()
         {
             // Get Base dir for app
             //============================================= 

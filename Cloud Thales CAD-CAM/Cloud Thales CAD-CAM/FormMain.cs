@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,16 +20,33 @@ namespace Cloud_Thales_CAD_CAM
         public string productName;
         public string featureId;
         public string featureName;
+        public static KeyValuePair<string, string> language;
         public XDocument keyInfo;
         public XDocument productInfo;
         public XDocument featureInfo;
+        public static FormMain mForm;
+        public static FormSettings sForm;
         FormSettings SettingsWindow;
+        public static MultiLanguage alp;
+        public static XDocument alpPackSourceXdocument;
 
         public FormMain()
         {
             InitializeComponent();
 
+            alp = new MultiLanguage(System.IO.File.Exists(Variables.baseDir + "\\AllLanguageInOnePack.alp") ? Variables.baseDir + "\\AllLanguageInOnePack.alp" : "");
+            alpPackSourceXdocument = alp.LoadAlp(System.IO.File.Exists(Variables.baseDir + "\\AllLanguageInOnePack.alp") ? Variables.baseDir + "\\AllLanguageInOnePack.alp" : "");
+
+            language = MultiLanguage.ResetLanguage(alpPackSourceXdocument);
+
             SettingsWindow = new FormSettings();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            mForm = (FormMain)Application.OpenForms["FormMain"];
+            sForm = SettingsWindow;
+            bool isSetAlpFormMain = alp.SetLanguage(language.Key, this.Controls, mForm);
         }
 
         private void buttonLoginLogout_Click(object sender, EventArgs e)
@@ -51,7 +69,7 @@ namespace Cloud_Thales_CAD_CAM
 
                 if (Variables.myStatus == HaspStatus.StatusOk)
                 {
-                    buttonLoginLogout.Text = "Logout";
+                    buttonLoginLogout.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Logout");
                     keyInfo = XDocument.Parse(MyGlobalMethods.GetSessionInfo("<haspformat format=\"keyinfo\"/>"));
                     productInfo = XDocument.Parse(MyGlobalMethods.GetSessionInfo(Variables.formatForGetProductId));
                     featureInfo = XDocument.Parse(MyGlobalMethods.GetSessionInfo(Variables.formatForGetFeatureId));
@@ -79,7 +97,7 @@ namespace Cloud_Thales_CAD_CAM
                         buttonCancelDetach.Enabled = true;
                     }
 
-                    labelIntro.Text = "Login successfully!";
+                    labelIntro.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Login successfully!");
                     labelIntro.ForeColor = Color.Green;
                     panelMain.Enabled = true;
                     labelLoginStatus.Enabled = true;
@@ -89,11 +107,13 @@ namespace Cloud_Thales_CAD_CAM
                     labelKeyInfo.Enabled = true;
                     linkLabelKeyInfo.Enabled = true;
                     buttonCheckAvailableLicenses.Enabled = false;
+                    sForm.labelLanguage.Enabled = false;
+                    sForm.comboBoxSelectLanguage.Enabled = false;
                 }
                 else 
                 {
                     labelLoginStatusCode.Text = Variables.myStatus.ToString();
-                    labelIntro.Text = "Please login first!";
+                    labelIntro.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Please login first!");
                     labelIntro.ForeColor = Color.Black;
                     panelMain.Enabled = false;
                 }
@@ -102,8 +122,8 @@ namespace Cloud_Thales_CAD_CAM
             {
                 Variables.myStatus = Variables.myHasp.Logout();
                 Variables.myStatus = HaspStatus.AlreadyLoggedOut;
-                buttonLoginLogout.Text = "Login";
-                labelIntro.Text = "Please login first!";
+                buttonLoginLogout.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Login");
+                labelIntro.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Please login first!"); 
                 linkLabelLicenseInfo.Text = "...";
                 linkLabelKeyInfo.Text = "...";
                 labelLoginStatusCode.Text = "...";
@@ -123,6 +143,8 @@ namespace Cloud_Thales_CAD_CAM
                 labelKeyInfo.Enabled = false;
                 linkLabelKeyInfo.Enabled = false;
                 buttonCheckAvailableLicenses.Enabled = true;
+                sForm.labelLanguage.Enabled = true;
+                sForm.comboBoxSelectLanguage.Enabled = true;
             }
         }
 
@@ -130,7 +152,7 @@ namespace Cloud_Thales_CAD_CAM
         {
             var availableLicenses = MyGlobalMethods.GetInfo(Variables.scopeUnfiltered, Variables.formatForGetAvailableLicenses, true);
 
-            MessageBox.Show(availableLicenses, "Available Licenses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(availableLicenses, MultiLanguage.ErrorMessageReplacer(language.Key, "Available Licenses"), MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             Variables.myStatus = HaspStatus.AlreadyLoggedOut;
         }
@@ -152,7 +174,7 @@ namespace Cloud_Thales_CAD_CAM
             }
             else 
             {
-                textBoxResult.Text = "Error: " + Variables.myStatus.ToString();
+                textBoxResult.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Error: ") + Variables.myStatus.ToString();
             }
         }
 
@@ -168,7 +190,7 @@ namespace Cloud_Thales_CAD_CAM
             }
             else
             {
-                textBoxResult.Text = "Error: " + Variables.myStatus.ToString();
+                textBoxResult.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Error: ") + Variables.myStatus.ToString();
             }
         }
 
@@ -208,17 +230,17 @@ namespace Cloud_Thales_CAD_CAM
                         }
                     }
 
-                    MessageBox.Show("Current status of the opperation is: " + myUpdateStatus.ToString() + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Detached!");
+                    MessageBox.Show(MultiLanguage.ErrorMessageReplacer(language.Key, "Current status of the opperation is: {0} \nPlease, re-login in application, for using LOCALLY license.").Replace("{0}", myUpdateStatus.ToString()), MultiLanguage.ErrorMessageReplacer(language.Key, "Successfully Detached!"));
                 }
                 else 
                 {
                     //handle error
-                    MessageBox.Show(myUpdateStatus.ToString(), "Detaching apply update error!");
+                    MessageBox.Show(myUpdateStatus.ToString(), MultiLanguage.ErrorMessageReplacer(language.Key, "Detaching apply update error!"));
                 }
             }
             else 
             {
-                if (myDetachStatus == HaspStatus.InvalidDuration && !Variables.useUrl)
+                if (myDetachStatus == HaspStatus.InvalidDuration)
                 {
                     try
                     {
@@ -240,9 +262,9 @@ namespace Cloud_Thales_CAD_CAM
                             }
                         }
 
-                        string myCancelDetachStatus = MyGlobalMethods.CancelDetachViaUrl(productId, childKeyId);
+                        string myCancelDetachStatus = Variables.useUrl ? MyGlobalMethods.CancelDetachViaUrl(productId, childKeyId) : MyGlobalMethods.CancelDetachViaLicensingApi(childKeyId);
 
-                        if (myCancelDetachStatus == HttpStatusCode.OK.ToString())
+                        if (myCancelDetachStatus == HttpStatusCode.OK.ToString() || myCancelDetachStatus == HaspStatus.StatusOk.ToString())
                         {
                             myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
 
@@ -255,36 +277,36 @@ namespace Cloud_Thales_CAD_CAM
                                 if (myUpdateStatus == HaspStatus.StatusOk)
                                 {
                                     //handle success
-                                    MessageBox.Show("Current status of the opperation is: " + myUpdateStatus.ToString() + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Detached!");
+                                    MessageBox.Show(MultiLanguage.ErrorMessageReplacer(language.Key, "Current status of the opperation is: {0} \nPlease, re-login in application, for using LOCALLY license.").Replace("{0}", myUpdateStatus.ToString()), MultiLanguage.ErrorMessageReplacer(language.Key, "Successfully Detached!"));
                                 }
                                 else
                                 {
                                     //handle error
-                                    MessageBox.Show(myUpdateStatus.ToString(), "Detaching apply update error!");
+                                    MessageBox.Show(myUpdateStatus.ToString(), MultiLanguage.ErrorMessageReplacer(language.Key, "Detaching apply update error!"));
                                 }
                             }
                             else
                             {
                                 //handle error
-                                MessageBox.Show(myDetachStatus.ToString(), "Re-Detaching error!");
+                                MessageBox.Show(myDetachStatus.ToString(), MultiLanguage.ErrorMessageReplacer(language.Key, "Re-Detaching error!"));
                             }
                         }
                         else
                         {
                             //handle error
-                            MessageBox.Show("Status request: " + myCancelDetachStatus + Environment.NewLine + "Something goes wrong... Please, try again later!", "Cancel Detaching error (In Re-Detach)!");
+                            MessageBox.Show(MultiLanguage.ErrorMessageReplacer(language.Key, "Status request: {0} \nSomething goes wrong... Please, try again later!").Replace("{0}", myCancelDetachStatus), MultiLanguage.ErrorMessageReplacer(language.Key, "Cancel Detaching error (In Re-Detach)!"));
                         }
                     }
                     catch 
                     {
                         // do nothing...
-                        MessageBox.Show(myDetachStatus.ToString(), "Detaching error!");
+                        MessageBox.Show(myDetachStatus.ToString(), MultiLanguage.ErrorMessageReplacer(language.Key, "Detaching error!"));
                     }
                 }
                 else 
                 {
                     //handle error
-                    MessageBox.Show(myDetachStatus.ToString(), "Detaching error!");
+                    MessageBox.Show(myDetachStatus.ToString(), MultiLanguage.ErrorMessageReplacer(language.Key, "Detaching error!"));
                 }
             }
         }
@@ -299,13 +321,13 @@ namespace Cloud_Thales_CAD_CAM
                 {
                     buttonLoginLogout.PerformClick();
 
-                    MessageBox.Show("Current status of the opperation is: " + myCancelDetachStatus + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Canceled Detaching license!");
+                    MessageBox.Show(MultiLanguage.ErrorMessageReplacer(language.Key, "Current status of the opperation is: {0} \nPlease, re-login in application, for using CLOUD license.").Replace("{0}", myCancelDetachStatus), MultiLanguage.ErrorMessageReplacer(language.Key, "Successfully Canceled Detaching license!"));
 
                 }
                 else 
                 {
                     //handle error
-                    MessageBox.Show("Status request: " + myCancelDetachStatus + Environment.NewLine + "Something goes wrong... Please, try again later!", "Cancel Detaching error!");
+                    MessageBox.Show(MultiLanguage.ErrorMessageReplacer(language.Key, "Status request: {0} \nSomething goes wrong... Please, try again later!").Replace("{0}", myCancelDetachStatus), MultiLanguage.ErrorMessageReplacer(language.Key, "Cancel Detaching error!"));
                 }
             }
             else 
@@ -316,12 +338,12 @@ namespace Cloud_Thales_CAD_CAM
                 {
                     buttonLoginLogout.PerformClick();
 
-                    MessageBox.Show("Current status of the opperation is: " + myCancelDetachStatus + Environment.NewLine + "Please, re-login in appplication, for using locally license.", "Successfully Canceled Detaching license!");
+                    MessageBox.Show(MultiLanguage.ErrorMessageReplacer(language.Key, "Current status of the opperation is: {0} \nPlease, re-login in application, for using CLOUD license.").Replace("{0}", myCancelDetachStatus), MultiLanguage.ErrorMessageReplacer(language.Key, "Successfully Canceled Detaching license!"));
                 }
                 else
                 {
                     //handle error
-                    MessageBox.Show(myCancelDetachStatus, "Cancel Detaching error!");
+                    MessageBox.Show(myCancelDetachStatus, MultiLanguage.ErrorMessageReplacer(language.Key, "Cancel Detaching error!"));
                 }
             }
         }
@@ -333,12 +355,12 @@ namespace Cloud_Thales_CAD_CAM
 
         private void linkLabelLicenseStatus_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show(MyGlobalMethods.GetSessionInfo("<haspformat format=\"sessioninfo\"/>"), "Session Info");
+            MessageBox.Show(MyGlobalMethods.GetSessionInfo("<haspformat format=\"sessioninfo\"/>"), MultiLanguage.ErrorMessageReplacer(language.Key, "Session Info"));
         }
 
         private void linkLabelKeyInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show(MyGlobalMethods.GetSessionInfo("<haspformat format=\"keyinfo\"/>"), "Key Info");
+            MessageBox.Show(MyGlobalMethods.GetSessionInfo("<haspformat format=\"keyinfo\"/>"), MultiLanguage.ErrorMessageReplacer(language.Key, "Key Info"));
         }
 
         private void numericUpDownDaysForDetach_ValueChanged(object sender, EventArgs e)
