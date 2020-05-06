@@ -50,16 +50,18 @@
             this.labelLoginStatus = new System.Windows.Forms.Label();
             this.labelLoginStatusCode = new System.Windows.Forms.Label();
             this.buttonCheckAvailableLicenses = new System.Windows.Forms.Button();
+            this.panelStatusBase = new System.Windows.Forms.Panel();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDaysForDetach)).BeginInit();
+            this.panelStatusBase.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonLoginLogout
             // 
-            this.buttonLoginLogout.Location = new System.Drawing.Point(11, 19);
+            this.buttonLoginLogout.Location = new System.Drawing.Point(11, 33);
             this.buttonLoginLogout.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLoginLogout.Name = "buttonLoginLogout";
-            this.buttonLoginLogout.Size = new System.Drawing.Size(462, 22);
+            this.buttonLoginLogout.Size = new System.Drawing.Size(181, 22);
             this.buttonLoginLogout.TabIndex = 0;
             this.buttonLoginLogout.Text = "Login";
             this.buttonLoginLogout.UseVisualStyleBackColor = true;
@@ -230,14 +232,16 @@
             // 
             // labelIntro
             // 
-            this.labelIntro.AutoSize = true;
+            this.labelIntro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelIntro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelIntro.Location = new System.Drawing.Point(185, 4);
+            this.labelIntro.Location = new System.Drawing.Point(0, 0);
             this.labelIntro.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelIntro.Name = "labelIntro";
-            this.labelIntro.Size = new System.Drawing.Size(105, 13);
+            this.labelIntro.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelIntro.Size = new System.Drawing.Size(484, 25);
             this.labelIntro.TabIndex = 2;
             this.labelIntro.Text = "Please login first!";
+            this.labelIntro.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelCurrentLicense
             // 
@@ -264,7 +268,7 @@
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(392, 46);
+            this.buttonSettings.Location = new System.Drawing.Point(392, 33);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(80, 22);
             this.buttonSettings.TabIndex = 9;
@@ -286,7 +290,7 @@
             // 
             this.labelLoginStatusCode.AutoSize = true;
             this.labelLoginStatusCode.Enabled = false;
-            this.labelLoginStatusCode.Location = new System.Drawing.Point(84, 57);
+            this.labelLoginStatusCode.Location = new System.Drawing.Point(120, 57);
             this.labelLoginStatusCode.Name = "labelLoginStatusCode";
             this.labelLoginStatusCode.Size = new System.Drawing.Size(16, 13);
             this.labelLoginStatusCode.TabIndex = 11;
@@ -294,7 +298,7 @@
             // 
             // buttonCheckAvailableLicenses
             // 
-            this.buttonCheckAvailableLicenses.Location = new System.Drawing.Point(197, 46);
+            this.buttonCheckAvailableLicenses.Location = new System.Drawing.Point(197, 33);
             this.buttonCheckAvailableLicenses.Name = "buttonCheckAvailableLicenses";
             this.buttonCheckAvailableLicenses.Size = new System.Drawing.Size(189, 22);
             this.buttonCheckAvailableLicenses.TabIndex = 12;
@@ -302,11 +306,21 @@
             this.buttonCheckAvailableLicenses.UseVisualStyleBackColor = true;
             this.buttonCheckAvailableLicenses.Click += new System.EventHandler(this.buttonCheckAvailableLicenses_Click);
             // 
+            // panelStatusBase
+            // 
+            this.panelStatusBase.Controls.Add(this.labelIntro);
+            this.panelStatusBase.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelStatusBase.Location = new System.Drawing.Point(0, 0);
+            this.panelStatusBase.Name = "panelStatusBase";
+            this.panelStatusBase.Size = new System.Drawing.Size(484, 25);
+            this.panelStatusBase.TabIndex = 13;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 391);
+            this.Controls.Add(this.panelStatusBase);
             this.Controls.Add(this.buttonCheckAvailableLicenses);
             this.Controls.Add(this.labelLoginStatusCode);
             this.Controls.Add(this.labelLoginStatus);
@@ -314,7 +328,6 @@
             this.Controls.Add(this.linkLabelKeyInfo);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.linkLabelLicenseInfo);
-            this.Controls.Add(this.labelIntro);
             this.Controls.Add(this.labelCurrentLicense);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.buttonLoginLogout);
@@ -327,6 +340,7 @@
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDaysForDetach)).EndInit();
+            this.panelStatusBase.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -355,6 +369,7 @@
         private System.Windows.Forms.Label labelLoginStatusCode;
         private System.Windows.Forms.Button buttonCheckAvailableLicenses;
         private System.Windows.Forms.Button buttonLoginLogout;
+        private System.Windows.Forms.Panel panelStatusBase;
     }
 }
 

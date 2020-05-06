@@ -25,7 +25,7 @@ namespace Cloud_Thales_CAD_CAM
         };
 
         public static HaspStatus myStatus = HaspStatus.AlreadyLoggedOut;
-        public static HaspFeature myFeature = new HaspFeature(10001);
+        public static HaspFeature myFeature = new HaspFeature(Properties.Settings.Default.FID);
         public static Hasp myHasp = new Hasp(myFeature);
 
         public static string specifyKeyId = null;

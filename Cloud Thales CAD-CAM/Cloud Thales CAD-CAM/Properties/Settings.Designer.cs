@@ -34,5 +34,17 @@ namespace Cloud_Thales_CAD_CAM.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10001")]
+        public int FID {
+            get {
+                return ((int)(this["FID"]));
+            }
+            set {
+                this["FID"] = value;
+            }
+        }
     }
 }

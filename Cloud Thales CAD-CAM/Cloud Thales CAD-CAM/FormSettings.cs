@@ -31,6 +31,9 @@ namespace Cloud_Thales_CAD_CAM
 
         private void numericUpDownFeatureId_ValueChanged(object sender, EventArgs e)
         {
+            Properties.Settings.Default.FID = Convert.ToInt32(numericUpDownFeatureId.Value);
+            Properties.Settings.Default.Save();
+
             Variables.myFeature = new Aladdin.HASP.HaspFeature(Convert.ToInt32(numericUpDownFeatureId.Value));
             Variables.myHasp = new Aladdin.HASP.Hasp(Variables.myFeature);
         }

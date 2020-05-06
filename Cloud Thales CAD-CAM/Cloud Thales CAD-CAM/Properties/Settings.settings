@@ -5,5 +5,8 @@
     <Setting Name="Language" Type="System.String" Scope="User">
       <Value Profile="(Default)">English (Default)</Value>
     </Setting>
+    <Setting Name="FID" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10001</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
