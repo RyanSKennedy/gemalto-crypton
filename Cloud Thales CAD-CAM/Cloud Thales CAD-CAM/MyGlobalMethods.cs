@@ -45,7 +45,7 @@ namespace Cloud_Thales_CAD_CAM
             HaspStatus getStatus = HaspStatus.AlreadyLoggedOut;
             if (Variables.myStatus == HaspStatus.StatusOk && !checkBeforeLogin)
             {
-                getStatus = Hasp.GetInfo(scope, format, Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], ref info);
+                getStatus = Hasp.GetInfo(scope, format, Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], ref info);
                 if (getStatus == HaspStatus.StatusOk)
                 {
                     return info;
@@ -57,7 +57,7 @@ namespace Cloud_Thales_CAD_CAM
             }
             else if (checkBeforeLogin)
             {
-                getStatus = Hasp.GetInfo(scope, format, Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], ref info);
+                getStatus = Hasp.GetInfo(scope, format, Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], ref info);
                 if (getStatus == HaspStatus.StatusOk)
                 {
                     return info;
@@ -78,7 +78,7 @@ namespace Cloud_Thales_CAD_CAM
             }
 
             httpClient = new HttpClient();
-            Uri fullUri = new Uri(Variables.urlForCancelDetachLicense.Replace("{HOST}", Variables.accHost).Replace("{PORT}", Variables.accPortStr).Replace("{KEY_ID}", targetKeyId).Replace("{VENDOR_ID}", Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault().Value).Replace("{PRODUCT_ID}", productId));
+            Uri fullUri = new Uri(Variables.urlForCancelDetachLicense.Replace("{HOST}", Variables.accHost).Replace("{PORT}", Variables.accPortStr).Replace("{KEY_ID}", targetKeyId).Replace("{VENDOR_ID}", Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault().Value).Replace("{PRODUCT_ID}", productId));
             HttpResponseMessage httpClientResponse = httpClient.GetAsync(fullUri).Result;
 
             return httpClientResponse.StatusCode.ToString();
@@ -90,7 +90,7 @@ namespace Cloud_Thales_CAD_CAM
 
             string info = null;
 
-            HaspStatus myCancelDetachStatus = Hasp.Transfer(Variables.actionForCancelDetach.Replace("{KEY_ID}", parentKeyId), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
+            HaspStatus myCancelDetachStatus = Hasp.Transfer(Variables.actionForCancelDetach.Replace("{KEY_ID}", parentKeyId), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], myId, ref info);
 
             return myCancelDetachStatus.ToString();
         }

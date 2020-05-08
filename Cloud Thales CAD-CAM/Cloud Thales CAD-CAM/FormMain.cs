@@ -167,7 +167,7 @@ namespace Cloud_Thales_CAD_CAM
                 sForm.comboBoxSelectLanguage.Enabled = true;
                 sForm.labelSelectBatchCode.Enabled = true;
                 sForm.comboBoxBatchCode.Enabled = true;
-                sForm.labelAddNewBatchCode.Enabled = false;
+                sForm.labelAddNewBatchCode.Enabled = true;
                 sForm.textBoxAddNewBatchCode.Enabled = true;
                 sForm.buttonAddNewBatchCode.Enabled = !String.IsNullOrEmpty(sForm.textBoxAddNewBatchCode.Text) ? true : false;
                 sForm.buttonDeleteBatchCode.Enabled = (sForm.comboBoxBatchCode.SelectedItem.ToString() != "DEMOMA") ? true : false;

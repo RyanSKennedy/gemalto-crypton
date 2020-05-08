@@ -59,7 +59,7 @@
             // buttonLoginLogout
             // 
             this.buttonLoginLogout.Location = new System.Drawing.Point(11, 33);
-            this.buttonLoginLogout.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonLoginLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonLoginLogout.Name = "buttonLoginLogout";
             this.buttonLoginLogout.Size = new System.Drawing.Size(181, 22);
             this.buttonLoginLogout.TabIndex = 0;
@@ -82,7 +82,7 @@
             this.panelMain.Controls.Add(this.labelSourceText);
             this.panelMain.Enabled = false;
             this.panelMain.Location = new System.Drawing.Point(11, 110);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(2);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(462, 283);
             this.panelMain.TabIndex = 1;
@@ -111,8 +111,13 @@
             // numericUpDownDaysForDetach
             // 
             this.numericUpDownDaysForDetach.Enabled = false;
-            this.numericUpDownDaysForDetach.Location = new System.Drawing.Point(191, 249);
-            this.numericUpDownDaysForDetach.Margin = new System.Windows.Forms.Padding(2);
+            this.numericUpDownDaysForDetach.Location = new System.Drawing.Point(190, 248);
+            this.numericUpDownDaysForDetach.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownDaysForDetach.Maximum = new decimal(new int[] {
+            9998,
+            0,
+            0,
+            0});
             this.numericUpDownDaysForDetach.Name = "numericUpDownDaysForDetach";
             this.numericUpDownDaysForDetach.Size = new System.Drawing.Size(60, 20);
             this.numericUpDownDaysForDetach.TabIndex = 8;
@@ -132,8 +137,8 @@
             // buttonDetach
             // 
             this.buttonDetach.Enabled = false;
-            this.buttonDetach.Location = new System.Drawing.Point(255, 247);
-            this.buttonDetach.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDetach.Location = new System.Drawing.Point(254, 247);
+            this.buttonDetach.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonDetach.Name = "buttonDetach";
             this.buttonDetach.Size = new System.Drawing.Size(100, 22);
             this.buttonDetach.TabIndex = 6;
@@ -145,7 +150,7 @@
             // 
             this.buttonEncrypt.Enabled = false;
             this.buttonEncrypt.Location = new System.Drawing.Point(256, 105);
-            this.buttonEncrypt.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonEncrypt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonEncrypt.Name = "buttonEncrypt";
             this.buttonEncrypt.Size = new System.Drawing.Size(100, 22);
             this.buttonEncrypt.TabIndex = 5;
@@ -157,7 +162,7 @@
             // 
             this.buttonDecrypt.Enabled = false;
             this.buttonDecrypt.Location = new System.Drawing.Point(360, 105);
-            this.buttonDecrypt.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDecrypt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonDecrypt.Name = "buttonDecrypt";
             this.buttonDecrypt.Size = new System.Drawing.Size(100, 22);
             this.buttonDecrypt.TabIndex = 4;
@@ -178,7 +183,7 @@
             // textBoxResult
             // 
             this.textBoxResult.Location = new System.Drawing.Point(2, 135);
-            this.textBoxResult.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxResult.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ReadOnly = true;
@@ -189,7 +194,7 @@
             // textBoxSourceText
             // 
             this.textBoxSourceText.Location = new System.Drawing.Point(2, 21);
-            this.textBoxSourceText.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxSourceText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxSourceText.Multiline = true;
             this.textBoxSourceText.Name = "textBoxSourceText";
             this.textBoxSourceText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -319,7 +324,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 391);
+            this.ClientSize = new System.Drawing.Size(484, 386);
             this.Controls.Add(this.panelStatusBase);
             this.Controls.Add(this.buttonCheckAvailableLicenses);
             this.Controls.Add(this.labelLoginStatusCode);
@@ -331,9 +336,9 @@
             this.Controls.Add(this.labelCurrentLicense);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.buttonLoginLogout);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MaximumSize = new System.Drawing.Size(500, 430);
-            this.MinimumSize = new System.Drawing.Size(500, 430);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.MaximumSize = new System.Drawing.Size(500, 425);
+            this.MinimumSize = new System.Drawing.Size(500, 425);
             this.Name = "FormMain";
             this.Text = "Cloud Thales CAD-CAM";
             this.Load += new System.EventHandler(this.FormMain_Load);
