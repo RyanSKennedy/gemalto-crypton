@@ -8,5 +8,11 @@
     <Setting Name="FID" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10001</Value>
     </Setting>
+    <Setting Name="BatchCodes" Type="System.Xml.Linq.XDocument" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CurrentBatchCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DEMOMA</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

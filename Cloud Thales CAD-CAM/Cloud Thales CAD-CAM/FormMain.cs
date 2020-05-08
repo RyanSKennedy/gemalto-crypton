@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -39,6 +41,16 @@ namespace Cloud_Thales_CAD_CAM
 
             language = MultiLanguage.ResetLanguage(alpPackSourceXdocument);
 
+            if (Properties.Settings.Default.BatchCodes != null && !String.IsNullOrEmpty(Properties.Settings.Default.BatchCodes.ToString())) 
+            {
+                foreach (var el in Properties.Settings.Default.BatchCodes.Root.Elements("vendor"))
+                {
+                    if (el.Descendants().FirstOrDefault(p => p.Name == "batchCode").Value == "DEMOMA") break;
+
+                    Variables.vendorCode.Add(new KeyValuePair<string, string>(el.Descendants().FirstOrDefault(p => p.Name == "batchCode").Value, el.Descendants().FirstOrDefault(p => p.Name == "vendorId").Value), el.Descendants().FirstOrDefault(p => p.Name == "vendorCode").Value);
+                }
+            }
+
             SettingsWindow = new FormSettings();
         }
 
@@ -55,15 +67,15 @@ namespace Cloud_Thales_CAD_CAM
             {
                 if (Variables.connectToSpecifyKeyId == true && !String.IsNullOrEmpty(Variables.specifyKeyId))
                 {
-                    Variables.myStatus = Variables.myHasp.Login(Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", Variables.specifyKeyId));
+                    Variables.myStatus = Variables.myHasp.Login(Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", Variables.specifyKeyId));
                 }
                 else 
                 {
-                    Variables.myStatus = Variables.myHasp.Login(Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], Variables.scopeForLocal);
+                    Variables.myStatus = Variables.myHasp.Login(Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], Variables.scopeForLocal);
 
                     if (Variables.myStatus != HaspStatus.StatusOk)
                     {
-                        Variables.myStatus = Variables.myHasp.Login(Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()]);
+                        Variables.myStatus = Variables.myHasp.Login(Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()]);
                     }
                 }
 
@@ -109,6 +121,14 @@ namespace Cloud_Thales_CAD_CAM
                     buttonCheckAvailableLicenses.Enabled = false;
                     sForm.labelLanguage.Enabled = false;
                     sForm.comboBoxSelectLanguage.Enabled = false;
+                    sForm.labelSelectBatchCode.Enabled = false;
+                    sForm.comboBoxBatchCode.Enabled = false;
+                    sForm.labelAddNewBatchCode.Enabled = false;
+                    sForm.textBoxAddNewBatchCode.Enabled = false;
+                    sForm.buttonAddNewBatchCode.Enabled = false;
+                    sForm.buttonDeleteBatchCode.Enabled = false;
+                    sForm.labelFeatureIdForUsing.Enabled = false;
+                    sForm.numericUpDownFeatureId.Enabled = false;
                 }
                 else 
                 {
@@ -145,6 +165,14 @@ namespace Cloud_Thales_CAD_CAM
                 buttonCheckAvailableLicenses.Enabled = true;
                 sForm.labelLanguage.Enabled = true;
                 sForm.comboBoxSelectLanguage.Enabled = true;
+                sForm.labelSelectBatchCode.Enabled = true;
+                sForm.comboBoxBatchCode.Enabled = true;
+                sForm.labelAddNewBatchCode.Enabled = false;
+                sForm.textBoxAddNewBatchCode.Enabled = true;
+                sForm.buttonAddNewBatchCode.Enabled = !String.IsNullOrEmpty(sForm.textBoxAddNewBatchCode.Text) ? true : false;
+                sForm.buttonDeleteBatchCode.Enabled = (sForm.comboBoxBatchCode.SelectedItem.ToString() != "DEMOMA") ? true : false;
+                sForm.labelFeatureIdForUsing.Enabled = true;
+                sForm.numericUpDownFeatureId.Enabled = true;
             }
         }
 
@@ -201,7 +229,7 @@ namespace Cloud_Thales_CAD_CAM
             string info = null;
             int detachingTime = (Convert.ToInt32(numericUpDownDaysForDetach.Value) * 24 * 60 * 60);
 
-            HaspStatus myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
+            HaspStatus myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], myId, ref info);
 
             if (myDetachStatus == HaspStatus.StatusOk)
             {
@@ -266,7 +294,7 @@ namespace Cloud_Thales_CAD_CAM
 
                         if (myCancelDetachStatus == HttpStatusCode.OK.ToString() || myCancelDetachStatus == HaspStatus.StatusOk.ToString())
                         {
-                            myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == "DEMOMA").FirstOrDefault()], myId, ref info);
+                            myDetachStatus = Hasp.Transfer(Variables.actionForDetach.Replace("{PRODUCT_ID}", productId).Replace("{NUMBER_OF_SECONDS}", detachingTime.ToString()), Variables.scopeForSpecificKeyId.Replace("{KEY_ID}", parentKeyId), Variables.vendorCode[Variables.vendorCode.Keys.Where(k => k.Key == Variables.currentBatchCode).FirstOrDefault()], myId, ref info);
 
                             if (myDetachStatus == HaspStatus.StatusOk)
                             {
@@ -387,6 +415,30 @@ namespace Cloud_Thales_CAD_CAM
                 buttonEncrypt.Enabled = false;
                 buttonDecrypt.Enabled = false;
             }
+        }
+    }
+
+    [TypeConverter(typeof(MyXDocumentTypeConverter))]
+    public class MyXDocument : XDocument
+    {
+    }
+
+    public class MyXDocumentTypeConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return (sourceType == typeof(string));
+        }
+
+        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                MyXDocument d = new MyXDocument();
+                d.Add(XDocument.Load(new StringReader((string)value)).Elements().First());
+                return d;
+            }
+            return null;
         }
     }
 }

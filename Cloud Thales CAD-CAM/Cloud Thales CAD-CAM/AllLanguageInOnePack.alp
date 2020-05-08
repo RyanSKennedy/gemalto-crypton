@@ -113,6 +113,21 @@
     <language type="translate" name="En">Select language for UI:</language>
     <language type="translate" name="Ru">Выберите язык UI:</language>
   </labelLanguage>
+  <labelSelectBatchCode>
+    <language type="origin" name="En (Default)">Select Batch code:</language>
+    <language type="translate" name="En">Select Batch code:</language>
+    <language type="translate" name="Ru">Выберите Batch code:</language>
+  </labelSelectBatchCode>
+  <labelAddNewBatchCode>
+    <language type="origin" name="En (Default)">Add new Batch code:</language>
+    <language type="translate" name="En">Add new Batch code:</language>
+    <language type="translate" name="Ru">Добавить новый Batch code:</language>
+  </labelAddNewBatchCode>
+  <buttonDeleteBatchCode>
+    <language type="origin" name="En (Default)">Delete</language>
+    <language type="translate" name="En">Delete</language>
+    <language type="translate" name="Ru">Удалить</language>
+    </buttonDeleteBatchCode>
   <!-- ErrorCodes -->
   <ErrorCodes>
     <!-- Internal Errors -->
@@ -214,6 +229,21 @@ Please, re-login in application, for using CLOUD license.</language>
       <language type="origin" name="En (Default)">Key Info</language>
       <language type="translate" name="En">Key Info</language>
       <language type="translate" name="Ru">Информация о ключе</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Format for input: </language>
+      <language type="translate" name="En">Format for input: </language>
+      <language type="translate" name="Ru">Формат для ввода: </language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Incorrect Vendor Data!</language>
+      <language type="translate" name="En">Incorrect Vendor Data!</language>
+      <language type="translate" name="Ru">Некорректно введённые данные Vendor'а!</language>
+    </error>
+    <error>
+      <language type="origin" name="En (Default)">Incorrect new Batch code! Maybe incorrect format of input string. Please check your data, you should using this format: </language>
+      <language type="translate" name="En">Incorrect new Batch code! Maybe incorrect format of input string. Please check your data, you should using this format: </language>
+      <language type="translate" name="Ru">Некорректный новый Batch code! Возможна ошибка в формате при вводе данных. Пожалуйста, проверьте формат вводимых данных: </language>
     </error>
     <!--<error>
       <language type="origin" name="En (Default)"></language>

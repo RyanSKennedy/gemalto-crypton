@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Aladdin.HASP;
 
 namespace Cloud_Thales_CAD_CAM
@@ -24,12 +21,16 @@ namespace Cloud_Thales_CAD_CAM
                         "tLEApXYvLvz6PEJdj4TegCZugj7c8bIOEqLXmloZ6EgVnjQ7/ttys7VFITB3mazzFiyQuKf4J6+b/a/Y" }
         };
 
+        public static string currentBatchCode = Properties.Settings.Default.CurrentBatchCode;
         public static HaspStatus myStatus = HaspStatus.AlreadyLoggedOut;
         public static HaspFeature myFeature = new HaspFeature(Properties.Settings.Default.FID);
         public static Hasp myHasp = new Hasp(myFeature);
 
         public static string specifyKeyId = null;
         public static bool connectToSpecifyKeyId = false;
+
+        public static string regExForValidatingNewBatchCode = @"[A-Z]{5,6}-[0-9]{5,6}:.{200,}";
+        public static string formatForInputToolTip = @"*YourBatchCode*-*YourVendorId*:*YourVendorCode*";
 
         public static string urlForCancelDetachLicense = @"http://{HOST}:{PORT}/_int_/cancel2.html?haspid={KEY_ID}&vendorid={VENDOR_ID}&productid={PRODUCT_ID}";
         public static string accHost = "127.0.0.1";
@@ -102,6 +103,15 @@ namespace Cloud_Thales_CAD_CAM
                                                      "<haspscope>" +
                                                      "    <hasp id=\"{KEY_ID}\"/>" +
                                                      "</haspscope>";
+
+        public static string templateBatch = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                                             "<vendorsData>" +
+                                             "  <vendor>" +
+                                             "      <batchCode>{BATCH_CODE}</batchCode>" +
+                                             "      <vendorId>{VENDOR_ID}</vendorId>" +
+                                             "      <vendorCode>{VENDOR_CODE}</vendorCode>" +
+                                             "  </vendor>" +
+                                             "</vendorsData>";
 
         public Variables () {}
     }

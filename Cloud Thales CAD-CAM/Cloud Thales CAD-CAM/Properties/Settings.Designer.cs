@@ -46,5 +46,29 @@ namespace Cloud_Thales_CAD_CAM.Properties {
                 this["FID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<vendorsData></vendorsData>")]
+        public global::Cloud_Thales_CAD_CAM.MyXDocument BatchCodes {
+            get {
+                return ((global::Cloud_Thales_CAD_CAM.MyXDocument)(this["BatchCodes"]));
+            }
+            set {
+                this["BatchCodes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("DEMOMA")]
+        public string CurrentBatchCode {
+            get {
+                return ((string)(this["CurrentBatchCode"]));
+            }
+            set {
+                this["CurrentBatchCode"] = value;
+            }
+        }
     }
 }
