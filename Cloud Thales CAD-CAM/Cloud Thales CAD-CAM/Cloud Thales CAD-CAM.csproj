@@ -136,6 +136,8 @@
     <Content Include="hasp_windows_x64_demo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="img\like.png" />
+    <None Include="img\dislike.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

@@ -51,15 +51,19 @@
             this.labelLoginStatusCode = new System.Windows.Forms.Label();
             this.buttonCheckAvailableLicenses = new System.Windows.Forms.Button();
             this.panelStatusBase = new System.Windows.Forms.Panel();
+            this.pictureBoxLike = new System.Windows.Forms.PictureBox();
+            this.pictureBoxDislike = new System.Windows.Forms.PictureBox();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDaysForDetach)).BeginInit();
             this.panelStatusBase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLike)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDislike)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonLoginLogout
             // 
             this.buttonLoginLogout.Location = new System.Drawing.Point(11, 33);
-            this.buttonLoginLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLoginLogout.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLoginLogout.Name = "buttonLoginLogout";
             this.buttonLoginLogout.Size = new System.Drawing.Size(181, 22);
             this.buttonLoginLogout.TabIndex = 0;
@@ -82,7 +86,7 @@
             this.panelMain.Controls.Add(this.labelSourceText);
             this.panelMain.Enabled = false;
             this.panelMain.Location = new System.Drawing.Point(11, 110);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(2);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(462, 283);
             this.panelMain.TabIndex = 1;
@@ -112,7 +116,7 @@
             // 
             this.numericUpDownDaysForDetach.Enabled = false;
             this.numericUpDownDaysForDetach.Location = new System.Drawing.Point(190, 248);
-            this.numericUpDownDaysForDetach.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDownDaysForDetach.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDownDaysForDetach.Maximum = new decimal(new int[] {
             9998,
             0,
@@ -138,7 +142,7 @@
             // 
             this.buttonDetach.Enabled = false;
             this.buttonDetach.Location = new System.Drawing.Point(254, 247);
-            this.buttonDetach.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDetach.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDetach.Name = "buttonDetach";
             this.buttonDetach.Size = new System.Drawing.Size(100, 22);
             this.buttonDetach.TabIndex = 6;
@@ -150,7 +154,7 @@
             // 
             this.buttonEncrypt.Enabled = false;
             this.buttonEncrypt.Location = new System.Drawing.Point(256, 105);
-            this.buttonEncrypt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonEncrypt.Margin = new System.Windows.Forms.Padding(2);
             this.buttonEncrypt.Name = "buttonEncrypt";
             this.buttonEncrypt.Size = new System.Drawing.Size(100, 22);
             this.buttonEncrypt.TabIndex = 5;
@@ -162,7 +166,7 @@
             // 
             this.buttonDecrypt.Enabled = false;
             this.buttonDecrypt.Location = new System.Drawing.Point(360, 105);
-            this.buttonDecrypt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonDecrypt.Margin = new System.Windows.Forms.Padding(2);
             this.buttonDecrypt.Name = "buttonDecrypt";
             this.buttonDecrypt.Size = new System.Drawing.Size(100, 22);
             this.buttonDecrypt.TabIndex = 4;
@@ -183,7 +187,7 @@
             // textBoxResult
             // 
             this.textBoxResult.Location = new System.Drawing.Point(2, 135);
-            this.textBoxResult.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxResult.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ReadOnly = true;
@@ -194,7 +198,7 @@
             // textBoxSourceText
             // 
             this.textBoxSourceText.Location = new System.Drawing.Point(2, 21);
-            this.textBoxSourceText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxSourceText.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSourceText.Multiline = true;
             this.textBoxSourceText.Name = "textBoxSourceText";
             this.textBoxSourceText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -320,11 +324,37 @@
             this.panelStatusBase.Size = new System.Drawing.Size(484, 25);
             this.panelStatusBase.TabIndex = 13;
             // 
+            // pictureBoxLike
+            // 
+            this.pictureBoxLike.Image = global::Cloud_Thales_CAD_CAM.Properties.Resources.like;
+            this.pictureBoxLike.InitialImage = global::Cloud_Thales_CAD_CAM.Properties.Resources.like;
+            this.pictureBoxLike.Location = new System.Drawing.Point(428, 61);
+            this.pictureBoxLike.Name = "pictureBoxLike";
+            this.pictureBoxLike.Size = new System.Drawing.Size(44, 44);
+            this.pictureBoxLike.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLike.TabIndex = 14;
+            this.pictureBoxLike.TabStop = false;
+            this.pictureBoxLike.Visible = false;
+            // 
+            // pictureBoxDislike
+            // 
+            this.pictureBoxDislike.Image = global::Cloud_Thales_CAD_CAM.Properties.Resources.dislike;
+            this.pictureBoxDislike.InitialImage = global::Cloud_Thales_CAD_CAM.Properties.Resources.dislike;
+            this.pictureBoxDislike.Location = new System.Drawing.Point(428, 61);
+            this.pictureBoxDislike.Name = "pictureBoxDislike";
+            this.pictureBoxDislike.Size = new System.Drawing.Size(44, 44);
+            this.pictureBoxDislike.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxDislike.TabIndex = 15;
+            this.pictureBoxDislike.TabStop = false;
+            this.pictureBoxDislike.Visible = false;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 386);
+            this.Controls.Add(this.pictureBoxDislike);
+            this.Controls.Add(this.pictureBoxLike);
             this.Controls.Add(this.panelStatusBase);
             this.Controls.Add(this.buttonCheckAvailableLicenses);
             this.Controls.Add(this.labelLoginStatusCode);
@@ -336,7 +366,7 @@
             this.Controls.Add(this.labelCurrentLicense);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.buttonLoginLogout);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(500, 425);
             this.MinimumSize = new System.Drawing.Size(500, 425);
             this.Name = "FormMain";
@@ -346,6 +376,8 @@
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDaysForDetach)).EndInit();
             this.panelStatusBase.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLike)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDislike)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,6 +407,8 @@
         private System.Windows.Forms.Button buttonCheckAvailableLicenses;
         private System.Windows.Forms.Button buttonLoginLogout;
         private System.Windows.Forms.Panel panelStatusBase;
+        private System.Windows.Forms.PictureBox pictureBoxLike;
+        private System.Windows.Forms.PictureBox pictureBoxDislike;
     }
 }
 

@@ -111,6 +111,8 @@ namespace Cloud_Thales_CAD_CAM
 
                     labelIntro.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Login successfully!");
                     labelIntro.ForeColor = Color.Green;
+                    pictureBoxLike.Visible = true;
+                    pictureBoxDislike.Visible = false;
                     panelMain.Enabled = true;
                     labelLoginStatus.Enabled = true;
                     labelLoginStatusCode.Enabled = true;
@@ -136,6 +138,8 @@ namespace Cloud_Thales_CAD_CAM
                     labelIntro.Text = MultiLanguage.ErrorMessageReplacer(language.Key, "Please login first!");
                     labelIntro.ForeColor = Color.Black;
                     panelMain.Enabled = false;
+                    pictureBoxLike.Visible = false;
+                    pictureBoxDislike.Visible = true;
                 }
             } 
             else 
@@ -151,6 +155,8 @@ namespace Cloud_Thales_CAD_CAM
                 textBoxResult.Text = "";
                 labelIntro.ForeColor = Color.Black;
                 panelMain.Enabled = false;
+                pictureBoxLike.Visible = false;
+                pictureBoxDislike.Visible = false;
                 labelNumberOfDaysForDetach.Enabled = false;
                 numericUpDownDaysForDetach.Value = 0;
                 numericUpDownDaysForDetach.Enabled = true;
@@ -181,6 +187,10 @@ namespace Cloud_Thales_CAD_CAM
             var availableLicenses = MyGlobalMethods.GetInfo(Variables.scopeUnfiltered, Variables.formatForGetAvailableLicenses, true);
 
             MessageBox.Show(availableLicenses, MultiLanguage.ErrorMessageReplacer(language.Key, "Available Licenses"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            labelLoginStatusCode.Text = "...";
+            pictureBoxLike.Visible = false;
+            pictureBoxDislike.Visible = false;
 
             Variables.myStatus = HaspStatus.AlreadyLoggedOut;
         }
